@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" >
+    <image/>
+
+    <number number="2"/>
+
+    <group property="green">
+
+        <resource acid="200" salt="200" food="200"/>
+
+        <object name="lair" type="lair" x="256" y="224" width="128" height="96">
+            <properties>
+                <property name="health" value="1000"/>
+                <property name="level" value="1"/>
+            </properties>
+        </object>
+
+        <object name="cleaner" type="unit" x="300" y="350" width="49" height="63">
+            <properties>
+                <property name="health" value="100"/>
+                <property name="level" value="1"/>
+            </properties>
+        </object>
+
+        <object name="cleaner" type="unit" x="300" y="350" width="49" height="63">
+            <properties>
+                <property name="health" value="100"/>
+                <property name="level" value="1"/>
+            </properties>
+        </object>
+
+        <object name="cleaner" type="unit" x="300" y="350" width="49" height="63">
+            <properties>
+                <property name="health" value="100"/>
+                <property name="level" value="1"/>
+            </properties>
+        </object>
+
+        <object name="cleaner" type="unit" x="300" y="350" width="49" height="63">
+            <properties>
+                <property name="health" value="100"/>
+                <property name="level" value="1"/>
+            </properties>
+        </object>
+
+    </group>
+
+    <group property="red">
+
+        <resource acid="200" salt="200" food="200"/>
+
+        <object name="lair" type="lair" x="800" y="800" width="128" height="96">
+            <properties>
+                <property name="health" value="1000"/>
+                <property name="level" value="1"/>
+            </properties>
+        </object>
+
+        <object name="stormtrooper" type="unit" x="800" y="730" width="49" height="63">
+            <properties>
+                <property name="health" value="100"/>
+                <property name="level" value="1"/>
+            </properties>
+        </object>
+
+    </group>
+
+
+    <group property="resource">
+
+        <object name="food" type="resource" x="160" y="420" width="128" height="96">
+            <properties>
+                <property name="health" value="500"/>
+                <property name="colony" value="-1"/>
+            </properties>
+        </object>
+
+        <object name="salt" type="resource" x="370" y="800" width="128" height="96">
+            <properties>
+                <property name="health" value="500"/>
+                <property name="colony" value="-1"/>
+            </properties>
+        </object>
+
+        <object name="acid" type="resource" x="760" y="460" width="128" height="96">
+            <properties>
+                <property name="health" value="500"/>
+                <property name="colony" value="-1"/>
+            </properties>
+        </object>
+
+    </group>
+
+
+</map>
