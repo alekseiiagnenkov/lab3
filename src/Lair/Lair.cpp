@@ -18,27 +18,27 @@ std::vector<int> Lair::checkTap(float x, float y, float centerX, float centerY,
                                 Usual *&usual,
                                 Cleaner *&cleaner) {
     int a = 0;
-    if (x > float(425 + centerX) && x < float(525 + centerX)) {
-        if (y > float(centerY) - 169 && y < float(centerY) - 86) {
+    if (x > float(910) && x < float(980)) {
+        if (y > float(330) && y < float(410)) {
             std::cout << "Create stormtrooper" << std::endl;
             stormtrooper = new Stormtrooper("stormtrooper", "unit", this->color, this->x + 100,
                                             this->y + 100,
                                             49,
                                             63, this->getLevel(), -1);
             a = 1;
-        } else if (y > centerY - 70 && y < centerY + 13) {
+        } else if (y > 430 && y < 510) {
             std::cout << "Create Hunter" << std::endl;
             hunter = new Hunter("hunter", "unit", this->color, this->x + 100, this->y + 100,
                                 49,
                                 63, this->getLevel(), -1);
             a = 2;
-        } else if (y > centerY + 29 && y < centerY + 112) {
+        } else if (y > 530 && y < 610) {
             std::cout << "Create usual" << std::endl;
             usual = new Usual("usual", "unit", this->color, this->x + 100, this->y + 100,
                               49,
                               63, this->getLevel(), -1);
             a = 3;
-        } else if (y > centerY + 128 && y < centerY + 211) {
+        } else if (y > 630 && y < 710) {
             std::cout << "Create cleaner" << std::endl;
             cleaner = new Cleaner("cleaner", "unit", this->color, this->x + 100, this->y + 100,
                                   49,

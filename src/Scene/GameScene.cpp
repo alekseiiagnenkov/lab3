@@ -2,9 +2,8 @@
 
 // Абсолютная скорость движения наблюдателя.
 static const float WATCHER_SPEED = 500;
-static const int OUR_LAIR = 0;
+static const int OUR_LAIR = 1;
 static const std::vector<std::string> COLOR = {"green", "red"};
-
 
 //создание окна
 Window *newWindow(const sf::Vector2i &windowSize) {
@@ -21,24 +20,24 @@ Window *newWindow(const sf::Vector2i &windowSize) {
     return window;
 }
 
+/////z nen
 //загрузка нужных текстур
 GameScene *newGameScene() {
     GameScene *gameScene = new GameScene;
     Level &level = gameScene->level;
     level.loadMapFromFile("../res/map.tmx");
-    level.loadObjectsFromFile("../res/static.xml");
+    level.loadObjectsFromFile("../res/objects.xml");
     return gameScene;
 }
-
 
 void mainGameLoop(Window &window, OnUpdate onUpdate, void *pData) {
 
     srand(time(0));
 
     sf::Font font;
-    font.loadFromFile("../res/20011.ttf");
+    font.loadFromFile("../res/font.ttf");
     sf::Clock click, attack, moveTime, updateArmy, updateTable, win, resource;
-    float x = 0, y = 0;
+    float x = 0, y = 0, x1=0, y1=0;
     int height = 0, width = 0;
     bool flag = false, flagClick = false, flagZoneClick = false, flagWin = false;
 
@@ -67,6 +66,8 @@ void mainGameLoop(Window &window, OnUpdate onUpdate, void *pData) {
             if (click.getElapsedTime().asMilliseconds() > 300) {
                 if (event.type == sf::Event::MouseButtonPressed) {
                     if (event.mouseButton.button == sf::Mouse::Left) {
+                        x1=event.mouseButton.x;
+                        y1=event.mouseButton.y;
                         x = (window.camera_.getCenter().x +
                              (float(event.mouseButton.x) / window.windowSize_.x - float(1) / 2) *
                              window.camera_.getSize().x);
@@ -75,8 +76,7 @@ void mainGameLoop(Window &window, OnUpdate onUpdate, void *pData) {
                              window.camera_.getSize().y);
                     }
                     click.restart();
-                    //std::cout << cells[index(x, y, widthMap)]->getX() << ";" << cells[index(x, y, widthMap)]->getY()<< std::endl;
-                    std::cout << x << ";" << y << std::endl;
+                    std::cout << x1 << ";" << y1 << std::endl;
                     flagClick = true;
                 }
                 if (event.type == sf::Event::MouseButtonReleased) {
@@ -87,9 +87,7 @@ void mainGameLoop(Window &window, OnUpdate onUpdate, void *pData) {
                         width = abs(int(y - (window.camera_.getCenter().y +
                                              (float(event.mouseButton.y) / window.windowSize_.y - float(1) / 2) *
                                              window.camera_.getSize().y)));
-                        std::cout << x << ";" << y << "    " << height << ";" << width
-                                  /* << "________" << window.camera_.getCenter().x << ";" << window.camera_.getCenter().y
-                                   */<< std::endl;//получаем координату и размер выделенной области с учетом приближения
+                        std::cout << x << ";" << y << "    " << height << ";" << width << std::endl;
                     }
                     flagZoneClick = true;
                 }
@@ -129,13 +127,13 @@ void mainGameLoop(Window &window, OnUpdate onUpdate, void *pData) {
 
 
 /////////////////////// если куда то тыкнули или выделили область////////////////////////
-        doPlayerEvents(&flag, &flagClick, &flagZoneClick, objects, x, y, width, height, &gameScene->level, &window,
+        doPlayerEvents(&flag, &flagClick, &flagZoneClick, objects, x, y, x1, y1, width, height, &gameScene->level, &window,
                        lair, font);
 /////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-/////////////////////////WIN/////////////////////////////////////////////////////////////
+/////////////////////////-------WIN-------------/////////////////////////////////////////
         if (gameScene->level.colonies_.size() == 1) {
             window.window_.setView(window.window_.getDefaultView());
             flagWin = true;
@@ -168,16 +166,26 @@ void mainGameLoop(Window &window, OnUpdate onUpdate, void *pData) {
 //----------------------------------------------------------------------------------------------------------
 }
 
-void doPlayerEvents(bool *flag, bool *flagClick, bool *flagZoneClick, std::vector<Object *> &objects, float x, float y,
+void doPlayerEvents(bool *flag, bool *flagClick, bool *flagZoneClick,
+                    std::vector<Object *> &objects,
+                    float x, float y, float x1, float y1,
                     int width,
                     int height, Level *level, Window *window, Lair *&lair, sf::Font &font) {
 
     //если в прошлый раз тыкнули на UNIT, то указываем ему куда идти
     if (*flag && *flagClick) {
         std::cout << objects.size() << std::endl;
-        for (int i = 0; i < objects.size(); i++) {
-            objects[i]->moveX = x + i * objects[i]->width + 3;
-            objects[i]->moveY = y;
+        int a = sqrt(objects.size());
+        if(a==1)
+            a++;
+        int xX = 0, yY = 0;
+        for (int i = 0; i < objects.size(); i++, xX++) {
+            if (xX >= a) {
+                xX = 0;
+                yY++;
+            }
+            objects[i]->moveX = x + xX * objects[i]->width + 3;
+            objects[i]->moveY = y + yY * objects[i]->width + 3;
         }
         x = 0;
         y = 0;
@@ -197,7 +205,7 @@ void doPlayerEvents(bool *flag, bool *flagClick, bool *flagZoneClick, std::vecto
             Cleaner *cleaner = nullptr;
 
             if (level->colonies_[OUR_LAIR]->wasteResources(
-                    lair->checkTap(x, y, window->camera_.getCenter().x, window->camera_.getCenter().y, stormtrooper,
+                    lair->checkTap(x1, y1, window->camera_.getCenter().x, window->camera_.getCenter().y, stormtrooper,
                                    hunter,
                                    usual,
                                    cleaner))) {
@@ -252,7 +260,17 @@ void drawObjects(Level level, sf::RenderWindow *window, sf::Font &font) {
     for (int i = 0; i < level.resources_.size(); i++) {
         level.resources_[i]->draw(*window);
         sf::Text text(std::to_string(level.resources_[i]->getHealth()), font, 15);
-        text.setFillColor(sf::Color::Blue);
+        if (level.resources_[i]->getColony() != nullptr) {
+            if (level.resources_[i]->getColony()->getColor() == "red")
+                text.setFillColor(sf::Color::Red);
+            else if (level.resources_[i]->getColony()->getColor() == "green")
+                text.setFillColor(sf::Color(40, 80, 40));
+            else if (level.resources_[i]->getColony()->getColor() == "magenta")
+                text.setFillColor(sf::Color::Magenta);
+            else if (level.resources_[i]->getColony()->getColor() == "yellow")
+                text.setFillColor(sf::Color::Yellow);
+        } else
+            text.setFillColor(sf::Color::Blue);
         text.setPosition(level.resources_[i]->x + 30, level.resources_[i]->y - 10);
         window->draw(text);
     }
@@ -261,7 +279,14 @@ void drawObjects(Level level, sf::RenderWindow *window, sf::Font &font) {
         if (level.colonies_[i]->getLair() != nullptr) {
             level.colonies_[i]->getLair()->draw(*window);
             sf::Text text(std::to_string(level.colonies_[i]->getLair()->getHealth()), font, 20);
-            text.setFillColor(sf::Color::Red);
+            if (level.colonies_[i]->getColor() == "red")
+                text.setFillColor(sf::Color::Red);
+            else if (level.colonies_[i]->getColor() == "green")
+                text.setFillColor(sf::Color(40, 80, 40));
+            else if (level.colonies_[i]->getColor() == "magenta")
+                text.setFillColor(sf::Color::Magenta);
+            else if (level.colonies_[i]->getColor() == "yellow")
+                text.setFillColor(sf::Color::Yellow);
             text.setPosition(level.colonies_[i]->getLair()->x + 30, level.colonies_[i]->getLair()->y - 30);
             window->draw(text);
         }
@@ -342,7 +367,11 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
         //атака персонажей
         if (attack.getElapsedTime().asMilliseconds() > 1000) {
 
+            //для каждой колонии
             for (int q = 0; q < level->colonies_.size(); q++) {
+                if (level->colonies_[q]->getResources().size() >= level->colonies_[q]->getLair()->getLevel() * 2) {
+                    level->colonies_[q]->getLair()->setLevel(level->colonies_[q]->getLair()->getLevel() + 1);
+                }
                 Army *army = level->colonies_[q]->getArmy();
                 if (army != nullptr) {
                     for (int p = 0; p < level->colonies_.size(); p++) {
@@ -451,7 +480,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                                                     flagStop = true;
                                                     break;
                                                 } else if (objects[k]->type == "resource") {
-                                                    if(((ResourcePoint *) objects[k])->getColony()==nullptr) {
+                                                    if (((ResourcePoint *) objects[k])->getColony() == nullptr) {
                                                         ((ResourcePoint *) objects[k])->takeDamage(
                                                                 cleaners[i]->getTake(),
                                                                 level->colonies_[q]);
@@ -471,18 +500,19 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                     }
                 }
 
+                //добавка ресурсов
                 if (resource.getElapsedTime().asMilliseconds() > 60000) {
-                    std::cout<<"do it"<<std::endl;
+                    std::cout << "do it" << std::endl;
                     std::vector<Object *> resources = level->colonies_[q]->getResources();
-                    for(int i=0; i<resources.size(); i++){
-                        if(resources[i]->name=="acid"){
-                            ((AcidPoint*)resources[i])->toIncrease(((AcidPoint*)resources[i])->getColony());
-                        } else if(resources[i]->name=="salt"){
-                            ((SaltPoint*)resources[i])->toIncrease(((SaltPoint*)resources[i])->getColony());
+                    for (int i = 0; i < resources.size(); i++) {
+                        if (resources[i]->name == "acid") {
+                            ((AcidPoint *) resources[i])->toIncrease(((AcidPoint *) resources[i])->getColony());
+                        } else if (resources[i]->name == "salt") {
+                            ((SaltPoint *) resources[i])->toIncrease(((SaltPoint *) resources[i])->getColony());
                         }
                     }
+                    resource.restart();
                 }
-                resource.restart();
 
             }
 

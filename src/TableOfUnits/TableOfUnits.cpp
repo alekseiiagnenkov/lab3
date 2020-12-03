@@ -44,9 +44,6 @@ void TableOfUnits::draw(int level, sf::RenderWindow *window, sf::Font &font) {
         textD.setPosition(920, 348);
         sf::Text textL(std::to_string(level), font, 15);
         textL.setPosition(920, 362);
-        sf::Text text(std::to_string(this->stormtrooper_->getDamage()), font, 10);
-        text.setPosition(920, 383);
-        window->draw(text);
         window->draw(textH);
         window->draw(textD);
         window->draw(textL);
@@ -70,9 +67,6 @@ void TableOfUnits::draw(int level, sf::RenderWindow *window, sf::Font &font) {
         textD.setPosition(920, 451);
         sf::Text textL(std::to_string(level), font, 15);
         textL.setPosition(920, 465);
-        sf::Text text(std::to_string(0), font, 10);
-        text.setPosition(920, 484);
-        window->draw(text);
         window->draw(textH);
         window->draw(textD);
         window->draw(textL);
@@ -97,8 +91,6 @@ void TableOfUnits::draw(int level, sf::RenderWindow *window, sf::Font &font) {
         sf::Text textL(std::to_string(level), font, 15);
         textL.setPosition(920, 567);
         sf::Text text(std::to_string(0), font, 10);
-        text.setPosition(920, 585);
-        window->draw(text);
         window->draw(textH);
         window->draw(textD);
         window->draw(textL);
@@ -122,9 +114,6 @@ void TableOfUnits::draw(int level, sf::RenderWindow *window, sf::Font &font) {
         textD.setPosition(920, 650);
         sf::Text textL(std::to_string(level), font, 15);
         textL.setPosition(920, 666);
-        sf::Text text(std::to_string(0), font, 10);
-        text.setPosition(920, 685);
-        window->draw(text);
         window->draw(textH);
         window->draw(textD);
         window->draw(textL);

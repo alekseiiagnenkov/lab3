@@ -1,7 +1,7 @@
 #include "Object.h"
 
-const float SPEED=0.25;
-//const float SPEED=1;
+//const float SPEED=0.25;
+const float SPEED=1;
 
 Object::Object(std::string &name, std::string &type, std::string& color, float x, float y, int w, int h) {
     this->x = x;
