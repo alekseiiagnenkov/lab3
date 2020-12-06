@@ -2,7 +2,7 @@
 
 // Абсолютная скорость движения наблюдателя.
 static const float WATCHER_SPEED = 500;
-static const int OUR_LAIR = 0;
+static const int OUR_LAIR = 1;
 static const container<std::string> COLOR = {"green", "red"};
 
 //создание окна
@@ -360,7 +360,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
             }
         }
 
-        level->T->update();
+        level->T->update(COLOR[OUR_LAIR]);
 
         int j, k;
 

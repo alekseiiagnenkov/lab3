@@ -1,7 +1,7 @@
 #include "Object.h"
 
-//const float SPEED=0.25;
-const float SPEED=1;
+const float SPEED=0.25;
+//const float SPEED=1;
 
 Object::Object(std::string &name, std::string &type, std::string& color, float x, float y, int w, int h) {
     this->x = x;
@@ -25,7 +25,7 @@ Object::Object(std::string &name, std::string &type, std::string& color, float x
 void Object::updateMove() {
 
     if (x != moveX) {
-        if(abs(int(x-moveX))<1)
+        if(abs(x-moveX)<SPEED)
             x=moveX;
         else {
             if (x < moveX)
@@ -35,7 +35,7 @@ void Object::updateMove() {
         }
     }
     if (y != moveY) {
-        if(abs(int(y-moveY))<1)
+        if(abs(y-moveY)<SPEED)
             y=moveY;
         else {
             if (y < moveY)

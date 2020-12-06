@@ -3,9 +3,9 @@
 #include <iostream>
 #include <vector>
 #include "../Cell/Cell.h"
-//#include "../../lib/MyContainer/Container.h"
+#include "../../lib/MyContainer/Container.h"
 
-int index(int x, int y, int width);
+int index(float x, float y, int width);
 
 
 class Table {
@@ -39,17 +39,17 @@ public:
 
     Cell *getCell(sf::Vector2i vector) { return this->cells_[index(vector.x, vector.y, width_)]; }
 
-    std::vector<Object *> getObjects(int x, int y, int width, int height, std::string& color);
+    container<Object *> getObjects(int x, int y, int width, int height, std::string& color);
 
     void pushObject(Object *object);
 
-    void update();
+    void update(const std::string& color);
 
-    std::vector<Cell *> getCellsObject(Object *object);
+    container<Cell *> getCellsObject(Object *object);
 
-    std::vector<Cell *> getNearObjects(Object *object);
+    container<Cell *> getNearObjects(Object *object);
 
-    std::vector<Cell *> getSolidCells(Object *object);
+    container<Cell *> getSolidCells(Object *object);
 
     void deleteObject(Object*);
 };

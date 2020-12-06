@@ -39,10 +39,6 @@ public:
         }
     }
 
-//    void setObjects(std::vector<Object *>& objects) {
-//        this->objects_ = objects;
-//    }
-
     void deleteObject(Object *object);
 
     void deleteLastObject();
