@@ -4,7 +4,6 @@
 #include <functional>
 #include <cfloat> // Константа FLT_EPSILON
 #include <cmath>
-#include <list>
 #include <iostream>
 
 /// Структура, абстрагирующая работу с окном и камерой.
@@ -77,6 +76,6 @@ int GetWatcherZoom();
 /// Центрирует камеру в заданной точке
 void setCameraCenter(Window &window, const sf::Vector2f &center);
 
-void doPlayerEvents(bool* flag, bool* flagClick, bool* flagZoneClick, std::vector<Object *> &objects, float x, float y, float x1, float y1, int width, int height, Level* level, Window* window, Lair *&lair, sf::Font&);
+void doPlayerEvents(bool* flag, bool* flagClick, bool* flagZoneClick, container<Object *> &objects, float x, float y, float x1, float y1, int width, int height, Level* level, Window* window, Lair *&lair, sf::Font&);
 
 

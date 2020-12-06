@@ -5,28 +5,29 @@
 #include "../Unit/Hunter/Hunter.h"
 #include "../Unit/Usual/Usual.h"
 #include "../Table/Table.h"
+#include "../../lib/MyContainer/Container.h"
 #include <vector>
 
 class Army {
 private:
-    std::vector<Stormtrooper *> stormtroopers_;
-    std::vector<Usual *> usuals_;
-    std::vector<Cleaner *> cleaners_;
-    std::vector<Hunter *> hunters_;
+    container<Stormtrooper *> stormtroopers_;
+    container<Usual *> usuals_;
+    container<Cleaner *> cleaners_;
+    container<Hunter *> hunters_;
 public:
     Army() {}
 
-    Army(std::vector<Stormtrooper *> &stormtroopers, std::vector<Usual *> &usuals, std::vector<Hunter *> &hunters,
-         std::vector<Cleaner *> &cleaners);
+    Army(container<Stormtrooper *> &stormtroopers, container<Usual *> &usuals, container<Hunter *> &hunters,
+         container<Cleaner *> &cleaners);
 
 
-    std::vector<Stormtrooper *> getStormtroopers() { return this->stormtroopers_; }
+    container<Stormtrooper *> getStormtroopers() { return this->stormtroopers_; }
 
-    std::vector<Usual *> getUsuals() { return this->usuals_; }
+    container<Usual *> getUsuals() { return this->usuals_; }
 
-    std::vector<Cleaner *> getCleaners() { return this->cleaners_; }
+    container<Cleaner *> getCleaners() { return this->cleaners_; }
 
-    std::vector<Hunter *> getHunters() { return this->hunters_; }
+    container<Hunter *> getHunters() { return this->hunters_; }
 
 
     void setUnit(Cleaner *cleaner) { this->cleaners_.push_back(cleaner); }

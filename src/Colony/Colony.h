@@ -14,7 +14,7 @@ private:
     int acid_;
     int salt_;
     int food_;
-    std::vector<Object*> resources_;
+    container<Object*> resources_;
     Lair *lair_;
     Army *army_;
     TableOfResource* TR;
@@ -33,7 +33,7 @@ public:
 
     int getSold() { return this->salt_; }
 
-    std::vector<Object*> getResources() { return this->resources_;}
+   container<Object*> getResources() { return this->resources_;}
 
     std::string& getColor() { return this->color_; }
 
@@ -59,7 +59,7 @@ public:
 
     void drawTableOfResource(sf::RenderWindow *window, sf::Font& font);
 
-    bool wasteResources (std::vector<int> waste);
+    bool wasteResources (container<int> waste);
 
     void updateResources();
 

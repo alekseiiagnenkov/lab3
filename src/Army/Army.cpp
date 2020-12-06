@@ -1,7 +1,7 @@
 #include "Army.h"
 
-Army::Army(std::vector<Stormtrooper *> &stormtroopers, std::vector<Usual *> &usuals, std::vector<Hunter *> &hunters,
-           std::vector<Cleaner *> &cleaners) {
+Army::Army(container<Stormtrooper *> &stormtroopers, container<Usual *> &usuals, container<Hunter *> &hunters,
+           container<Cleaner *> &cleaners) {
     this->stormtroopers_ = stormtroopers;
     this->usuals_ = usuals;
     this->hunters_ = hunters;
@@ -46,8 +46,8 @@ void Army::checkUnitsHealth(Table *T) {
     for (int i = 0; i < this->hunters_.size(); i++) {
         if (this->hunters_[i]->getHealth() < 0) {
             Hunter *H = this->hunters_[i];
-            auto begin = hunters_.cbegin();
-            this->hunters_.erase(begin + i);
+            //auto begin = hunters_.cbegin();
+            this->hunters_.erase(/*begin + */i);
             T->deleteObject(H);
             delete H;
         }
@@ -55,8 +55,8 @@ void Army::checkUnitsHealth(Table *T) {
     for (int i = 0; i < this->usuals_.size(); i++) {
         if (this->usuals_[i]->getHealth() < 0) {
             Usual *H = this->usuals_[i];
-            auto begin = usuals_.cbegin();
-            this->usuals_.erase(begin + i);
+            //auto begin = usuals_.cbegin();
+            this->usuals_.erase(/*begin + */i);
             T->deleteObject(H);
             delete H;
         }
@@ -64,8 +64,8 @@ void Army::checkUnitsHealth(Table *T) {
     for (int i = 0; i < this->stormtroopers_.size(); i++) {
         if (this->stormtroopers_[i]->getHealth() < 0) {
             Stormtrooper *H = this->stormtroopers_[i];
-            auto begin = stormtroopers_.cbegin();
-            this->stormtroopers_.erase(begin + i);
+            //auto begin = stormtroopers_.cbegin();
+            this->stormtroopers_.erase(/*begin +*/ i);
             T->deleteObject(H);
             delete H;
         }
@@ -73,8 +73,8 @@ void Army::checkUnitsHealth(Table *T) {
     for (int i = 0; i < this->cleaners_.size(); i++) {
         if (this->cleaners_[i]->getHealth() < 0) {
             Cleaner *H = this->cleaners_[i];
-            auto begin = cleaners_.cbegin();
-            this->cleaners_.erase(begin + i);
+            //auto begin = cleaners_.cbegin();
+            this->cleaners_.erase(/*begin +*/ i);
             T->deleteObject(H);
             delete H;
         }

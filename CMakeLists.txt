@@ -49,9 +49,6 @@ add_executable(
         src/Cell/Cell.cpp
         src/Cell/Cell.h
 
-        src/TableOfCreatedUnits/TableOfCreatedUnits.cpp
-        src/TableOfCreatedUnits/TableOfCreatedUnits.h
-
         src/TableOfUnits/TableOfUnits.cpp
         src/TableOfUnits/TableOfUnits.h
 
@@ -63,7 +60,9 @@ add_executable(
 
         src/TableOfResource/TableOfResource.cpp
         src/TableOfResource/TableOfResource.h
-        src/Сontainer/Сontainer.cpp src/Сontainer/Сontainer.h)
+
+        lib/MyContainer/Container.h
+        lib/MyContainer/Container.cpp)
 
 # Detect and add SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/lib/cmake_modules" ${CMAKE_MODULE_PATH})

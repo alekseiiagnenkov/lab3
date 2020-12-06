@@ -12,7 +12,7 @@ void Lair::drawTableOfUnits(sf::RenderWindow *window, sf::Font &font) {
     this->getTableOfUnits()->draw(this->level_, window, font);
 }
 
-std::vector<int> Lair::checkTap(float x, float y, float centerX, float centerY,
+container<int> Lair::checkTap(float x, float y,
                                 Stormtrooper *&stormtrooper,
                                 Hunter *&hunter,
                                 Usual *&usual,

@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../Object/Object.h"
+//#include "../../lib/MyContainer/Container.h"
 
 class Cell {
 private:
-    //Object *object_;
     std::vector<Object *> objects_;
     std::string type_;
     int x_;

@@ -5,17 +5,18 @@
 #include "../Unit/Stormtrooper/Stormtrooper.h"
 #include "../Unit/Cleaner/Cleaner.h"
 #include "../Unit/Usual/Usual.h"
+#include "../../lib/MyContainer/Container.h"
 
 class TableOfUnits {
 private:
     Cleaner* cleaner_;
-    std::vector<int> costC_;
+    container<int> costC_;
     Hunter* hunter_;
-    std::vector<int> costH_;
+    container<int> costH_;
     Usual* usual_;
-    std::vector<int> costU_;
+    container<int> costU_;
     Stormtrooper* stormtrooper_;
-    std::vector<int> costS_;
+    container<int> costS_;
     sf::Texture texture;
     sf::Sprite background;
 public:
@@ -32,6 +33,6 @@ public:
 
     void draw(int level, sf::RenderWindow* window, sf::Font&);
 
-    std::vector<int> getCost(int );
+    container<int> getCost(int );
 
 };

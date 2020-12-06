@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "../Cell/Cell.h"
+//#include "../../lib/MyContainer/Container.h"
 
 int index(int x, int y, int width);
 
@@ -14,7 +15,7 @@ private:
     std::vector<Cell *> cells_;
 public:
     //CONSTRUCTORS
-    Table(int width, int height, std::vector<Cell *> &cells);
+    Table(int width, int height, std::vector<Cell *> &cells );
 
 
     //GETTERS

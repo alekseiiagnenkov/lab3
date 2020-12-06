@@ -15,7 +15,7 @@ void Colony::drawTableOfResource(sf::RenderWindow *window, sf::Font &font) {
                                      font);
 }
 
-bool Colony::wasteResources(std::vector<int> waste) {
+bool Colony::wasteResources(container<int> waste) {
     if (!((this->salt_ - waste[0]) < 0 || (this->acid_ - waste[1]) < 0 || (this->food_ - waste[2]) < 0)) {
         this->salt_ -= waste[0];
         this->acid_ -= waste[1];

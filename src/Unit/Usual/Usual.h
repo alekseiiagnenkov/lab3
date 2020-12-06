@@ -9,7 +9,8 @@ private:
 public:
     //CONSTRUCTOR
     Usual(int level);
-    Usual(std::string name, std::string type, std::string  color,
+
+    Usual(std::string name, std::string type, std::string color,
           int x, int y, int w, int h, int lvl, int health);
 
 
@@ -24,5 +25,5 @@ public:
 
     void setTake(int take) { this->take_ = take; }
 
-    void attackUnit(Unit* U, int a);
+    void attackUnit(Unit *U, int a);
 };

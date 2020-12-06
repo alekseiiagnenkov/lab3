@@ -130,7 +130,7 @@ void TableOfUnits::draw(int level, sf::RenderWindow *window, sf::Font &font) {
     }
 }
 
-std::vector<int> TableOfUnits::getCost(int number) {
+container<int> TableOfUnits::getCost(int number) {
     if (number == 1)
         return this->costS_;
     else if (number == 2)

@@ -3,6 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include "../Object/Object.h"
 #include "../TableOfUnits/TableOfUnits.h"
+#include "../../lib/MyContainer/Container.h"
 
 
 class Lair : public Object {
@@ -44,7 +45,7 @@ public:
 
     void drawTableOfUnits(sf::RenderWindow *window, sf::Font &font);
 
-    std::vector<int> checkTap(float x, float y, float centerX, float centerY,
+    container<int> checkTap(float x, float y,
                               Stormtrooper *&stormtrooper,
                               Hunter *&hunter,
                               Usual *&usual,

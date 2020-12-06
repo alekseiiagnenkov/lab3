@@ -16,7 +16,7 @@
 
 #include "../../lib/tinyxml2/tinyxml2.h"
 #include <SFML/Graphics.hpp>
-#include <vector>
+#include "../../lib/MyContainer/Container.h"
 #include <iostream>
 
 // В картах TMX слой - это набор тайлов (спрайтов),
@@ -37,8 +37,8 @@ private:
 public:
     Table *T;
 
-    std::vector<ResourcePoint *> resources_;
-    std::vector<Colony *> colonies_;
+    container<ResourcePoint *> resources_;
+    container<Colony *> colonies_;
 
     // Загружает данные из TMX в память объекта.
     bool loadMapFromFile(const std::string &filepath);

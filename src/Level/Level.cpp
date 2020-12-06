@@ -35,6 +35,7 @@ std::string joinPaths(const std::string &path, const std::string &subpath) {
 bool Level::loadMapFromFile(const std::string &filepath) {
     XMLDocument levelFile;
     std::vector<Cell *> cells;
+    //container<Cell *> cells;
 
     // Загружаем файл в память
     if (levelFile.LoadFile(filepath.c_str()) != XML_SUCCESS) {
@@ -75,7 +76,8 @@ bool Level::loadMapFromFile(const std::string &filepath) {
     const int rows = int(tileSetImage_.getSize().y / tileHeight_);
 
     //получаем прямоугольники(квадраты) по одному
-    std::vector<sf::IntRect> subRects;
+    //std::vector<sf::IntRect> subRects;
+    container<sf::IntRect> subRects;
     for (int y = 0; y < rows; y++) {
         for (int x = 0; x < columns; x++) {
             sf::IntRect rect;
@@ -164,7 +166,7 @@ bool Level::loadObjectsFromFile(const std::string &filepath) {
     Lair *lair;
     Colony *colony;
 
-    std::vector<Object> objects;
+    container<Object> objects;
     // Load XML into in-memory XMLDocument.
     if (stateFile.LoadFile(filepath.c_str()) != XML_SUCCESS) {
         throw std::runtime_error("Loading level \"" + filepath + "\" failed.");
@@ -203,12 +205,12 @@ bool Level::loadObjectsFromFile(const std::string &filepath) {
             }
 
             //Массив солдат
-            std::vector<Unit *> army;
+            container<Unit *> army;
 
-            std::vector<Cleaner*> cleaners;
-            std::vector<Stormtrooper*> stormtroopers;
-            std::vector<Usual*> usuals;
-            std::vector<Hunter*> hunters;
+            container<Cleaner*> cleaners;
+            container<Stormtrooper*> stormtroopers;
+            container<Usual*> usuals;
+            container<Hunter*> hunters;
 
             // Контейнер <object>
             XMLElement *element;
@@ -307,8 +309,6 @@ bool Level::loadObjectsFromFile(const std::string &filepath) {
 
             group = group->NextSiblingElement("group");
             if (numberColonies > 0) {
-
-                //colonies_.push_back(new Colony(acid, salt, food, lair, army, property));
                 colonies_.push_back(
                         new Colony(acid, salt, food, lair, property, new Army(stormtroopers,usuals,hunters,cleaners)));
             }
@@ -333,6 +333,13 @@ void Level::draw(sf::RenderTarget &target) {
     const sf::FloatRect viewportRect = target.getView().getViewport();
 
     // draw all tiles (and don't draw objects)
+    for (const auto &layer : layers_) {
+        for (const auto &tile : layer.tiles) {
+            if (viewportRect.intersects(tile.getLocalBounds())) {
+                target.draw(tile);
+            }
+        }
+    }
     for (const auto &layer : layers_) {
         for (const auto &tile : layer.tiles) {
             if (viewportRect.intersects(tile.getLocalBounds())) {
