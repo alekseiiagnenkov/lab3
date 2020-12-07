@@ -26,14 +26,6 @@ void Table::update(const std::string &color, sf::RenderWindow *window) {
             //если это солдат, то
             if (objects[j]->type == "unit") {
 
-                ///////////определяем взаимодействие с соседними объектами//////////////////
-//                if (objects[j]->x == objects[j]->moveX && objects[j]->y == objects[j]->moveY) {
-//                    container<Cell *> cellsObject = getCellsObject(objects[j]);
-//                    //массив соседних ячек с объектами
-//                    container<Cell *> nearObjects = getNearObjects(objects[j]);
-//                }
-                //////////////////////////////////////////////////////////////////////////////
-
 
                 ////////////////////////////ДВИЖЕНИЕ ВРАГОВ//////////////////////////////////////
                 if ((objects[j]->x == objects[j]->moveX ||
@@ -63,14 +55,6 @@ void Table::update(const std::string &color, sf::RenderWindow *window) {
                 //////////////////ДВИЖЕНИЕ СОЛДАТ////////////////////////////////////////////////////
                 if (objects[j]->x != objects[j]->moveX || objects[j]->y != objects[j]->moveY) {
                     container<Cell *> cellsObject = getCellsObject(objects[j]);//ячейки которым принадлежит unit
-                    //sf::Sprite sprite;
-//                    for(int o=0; o<cellsObject.size(); o++){
-//                        //sprite.setTexture(tileSetImage_);//ссылка на файл с текстурами
-//                        sprite.setTextureRect(sf::Rect(0,0,0,0));
-//                        sprite.setPosition(cellsObject[o]->getX(), cellsObject[o]->getX());//задаем положение тайла
-//                        sprite.setColor(sf::Color(255, 0, 0, 100));
-//                        window->draw(sprite);
-//                    }
 
                     ///////////определяем столкновение с solid//////////////////////////////////
                     //массив соседних ячеек с лавой
@@ -108,8 +92,7 @@ void Table::update(const std::string &color, sf::RenderWindow *window) {
                         cellsObject = getCellsObject(objects[j]);
                         for (int k = 0; k < nearSolids.size(); k++) {
                             for (int l = 0; l < cellsObject.size(); l++) {
-                                if (nearSolids[k] == cellsObject[l])
-                                    /*getCell(cellsObject[l]->getX()*//* + x*//*, cellsObject[l]->getY()*//* + y*//*))*/ {
+                                if (nearSolids[k] == cellsObject[l]){
                                     objects[j]->y -= y;
                                     objects[j]->x -= x;
                                     objects[j]->moveX = objects[j]->x;
@@ -270,17 +253,6 @@ container<Cell *> Table::getNearObjects(Object *object) {
         }
     }
     objects.clear();
-    //вверх
-//    for (float i = object->x - 32; i < object->x + object->width + 32; i += 32) {
-//        cell = this->getCell(i, object->y - 32);
-//        objects = cell->getObjects();
-//        for (int j = 0; j < objects.size(); j++) {
-//            Obj = objects[j];
-//            if (Obj != nullptr && Obj != object)
-//                cells.push_back(cell);
-//        }
-//    }
-//    objects.clear();
 
     for (int i = 0; i < b; i++) {
         cell = this->getCell(object->x - 32, object->y + i * 32);
@@ -292,17 +264,6 @@ container<Cell *> Table::getNearObjects(Object *object) {
         }
     }
     objects.clear();
-//
-//    //сверху вниз края
-//    for (int i = object->y; i < object->y + object->height + 32; i += 32) {
-//        cell = this->getCell(object->x - 32, i);
-//        for (int j = 0; j < objects.size(); j++) {
-//            Obj = objects[j];
-//            if (Obj != nullptr && Obj != object)
-//                cells.push_back(cell);
-//        }
-//    }
-//    objects.clear();
 
     for (int i = 0; i < b; i++) {
         cell = this->getCell(object->x + a * 32 + 32, object->y + i * 32);
@@ -315,17 +276,6 @@ container<Cell *> Table::getNearObjects(Object *object) {
     }
     objects.clear();
 
-//    for (int i = object->y; i < object->y + object->height + 32; i += 32) {
-//        cell = this->getCell(object->x + object->width + 32, i);
-//        objects = cell->getObjects();
-//        for (int j = 0; j < objects.size(); j++) {
-//            Obj = objects[j];
-//            if (Obj != nullptr && Obj != object)
-//                cells.push_back(cell);
-//        }
-//    }
-//    objects.clear();
-
     for (int i = -1; i < a + 1; i++) {
         cell = this->getCell(object->x + i * 32, object->y + b * 32 + 32);
         objects = cell->getObjects();
@@ -337,17 +287,6 @@ container<Cell *> Table::getNearObjects(Object *object) {
     }
     objects.clear();
 
-//    //низ
-//    for (int i = object->x - 32; i < object->x + object->width + 32; i += 32) {
-//        cell = this->getCell(i, object->y + object->height + 32);
-//        objects = cell->getObjects();
-//        for (int j = 0; j < objects.size(); j++) {
-//            Obj = objects[j];
-//            if (Obj != nullptr && Obj != object)
-//                cells.push_back(cell);
-//        }
-//    }
-//    objects.clear();
     return cells;
 }
 
@@ -371,9 +310,6 @@ container<Cell *> Table::getSolidCells(Object *object) {
 
     for (int i = -1; i < a + 1; i++) {
         cell = this->getCell(object->x + i * 32, object->y - 32);
-        //вверх
-//    for (int i = object->x - 32; i < object->x + object->width + 32; i += 32) {
-//        cell = this->getCell(i, object->y - 32);
         if (cell->getType() == "solid") {
             cells.push_back(cell);
         }
@@ -381,8 +317,6 @@ container<Cell *> Table::getSolidCells(Object *object) {
 
     for (int i = 0; i < b; i++) {
         cell = this->getCell(object->x - 32, object->y + i * 32);
-//    for (int i = object->y; i < object->y + object->height + 32; i += 32) {
-//        cell = this->getCell(object->x - 32, i);
         if (cell->getType() == "solid") {
             cells.push_back(cell);
         }
@@ -390,8 +324,6 @@ container<Cell *> Table::getSolidCells(Object *object) {
 
     for (int i = 0; i < b; i++) {
         cell = this->getCell(object->x + a * 32 + 32, object->y + i * 32);
-//        for (int i = object->y; i < object->y + object->height + 32; i += 32) {
-//        cell = this->getCell(object->x + object->width + 32, i);
         if (cell->getType() == "solid") {
             cells.push_back(cell);
         }
@@ -399,9 +331,6 @@ container<Cell *> Table::getSolidCells(Object *object) {
 
     for (int i = -1; i < a + 1; i++) {
         cell = this->getCell(object->x + i * 32, object->y + b * 32 + 32);
-        //низ
-//    for (int i = object->x - 32; i < object->x + object->width + 32; i += 32) {
-//        cell = this->getCell(i, object->y + object->height + 32);
         if (cell->getType() == "solid") {
             cells.push_back(cell);
         }

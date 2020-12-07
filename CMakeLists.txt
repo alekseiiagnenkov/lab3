@@ -62,7 +62,7 @@ add_executable(
         src/TableOfResource/TableOfResource.h
 
         lib/MyContainer/Container.h
-        lib/MyContainer/Container.cpp)
+)
 
 # Detect and add SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/lib/cmake_modules" ${CMAKE_MODULE_PATH})
