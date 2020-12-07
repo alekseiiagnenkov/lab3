@@ -370,7 +370,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
             //для каждой колонии
             for (int q = 0; q < level->colonies_.size(); q++) {
                 if (level->colonies_[q]->getResources().size() >= level->colonies_[q]->getLair()->getLevel() * 2) {
-                    level->colonies_[q]->getLair()->setLevel(level->colonies_[q]->getLair()->getLevel() + 1);
+                    level->colonies_[q]->getLair()->levelUp();
                 }
                 Army *army = level->colonies_[q]->getArmy();
                 if (army != nullptr) {

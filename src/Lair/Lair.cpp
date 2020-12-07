@@ -49,3 +49,9 @@ container<int> Lair::checkTap(float x, float y,
     }
     return this->getTableOfUnits()->getCost(a);
 }
+
+void Lair::levelUp() {
+    setLevel(getLevel() + 1);
+    this->maxHealth_ = this->level_ * 1000;
+    this->health_ = this->maxHealth_;
+}
