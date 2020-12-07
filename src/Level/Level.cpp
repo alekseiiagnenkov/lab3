@@ -154,7 +154,6 @@ bool Level::loadMapFromFile(const std::string &filepath) {
         layerElement = layerElement->NextSiblingElement("layer");//переходим к загрузке следующего слоя
         flag = 1;
     }
-    flag = 1;
 
     T = new Table(width_, height_, cells);
 

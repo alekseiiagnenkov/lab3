@@ -35,15 +35,17 @@ public:
 
 
     //FUNCTION
-    Cell *getCell(float x, float y) { return this->cells_[index(int(x), int(y), width_)]; }
+    Cell *getCell(float x, float y) {
+        int ind=index(x,y, width_);
+        return this->cells_[ind]; }
 
-    Cell *getCell(sf::Vector2i vector) { return this->cells_[index(vector.x, vector.y, width_)]; }
+    Cell *getCell(sf::Vector2f vector) { return this->cells_[index(vector.x, vector.y, width_)]; }
 
-    container<Object *> getObjects(int x, int y, int width, int height, std::string& color);
+    container<Object *> getObjects(float x, float y, int width, int height, std::string& color);
 
     void pushObject(Object *object);
 
-    void update(const std::string& color);
+    void update(const std::string& color, sf::RenderWindow *);
 
     container<Cell *> getCellsObject(Object *object);
 

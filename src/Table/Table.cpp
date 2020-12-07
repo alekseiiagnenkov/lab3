@@ -14,7 +14,7 @@ void Table::deleteObject(Object *object) {
     }
 }
 
-void Table::update(const std::string &color) {
+void Table::update(const std::string &color, sf::RenderWindow *window) {
     std::vector<Cell *> cells = this->getCells();
     bool flag = true;
 
@@ -27,18 +27,17 @@ void Table::update(const std::string &color) {
             if (objects[j]->type == "unit") {
 
                 ///////////определяем взаимодействие с соседними объектами//////////////////
-                if (objects[j]->x == objects[j]->moveX && objects[j]->y == objects[j]->moveY) {
-                    container<Cell *> cellsObject = getCellsObject(objects[j]);
-                    //массив соседних ячек с объектами
-                    container<Cell *> nearObjects;
-                    nearObjects = getNearObjects(objects[j]);
-                }
+//                if (objects[j]->x == objects[j]->moveX && objects[j]->y == objects[j]->moveY) {
+//                    container<Cell *> cellsObject = getCellsObject(objects[j]);
+//                    //массив соседних ячек с объектами
+//                    container<Cell *> nearObjects = getNearObjects(objects[j]);
+//                }
                 //////////////////////////////////////////////////////////////////////////////
 
 
                 ////////////////////////////ДВИЖЕНИЕ ВРАГОВ//////////////////////////////////////
                 if ((objects[j]->x == objects[j]->moveX ||
-                     objects[j]->y == objects[j]->moveY && objects[j]) && objects[j]->color != color) {
+                     objects[j]->y == objects[j]->moveY) && objects[j]->color != color) {
                     container<Cell *> cellsObject;
                     bool flag2 = true;
                     float x = objects[j]->x, y = objects[j]->y;
@@ -50,10 +49,11 @@ void Table::update(const std::string &color) {
                         }
                         cellsObject = getCellsObject(objects[j]);
                         for (int k = 0; k < cellsObject.size(); k++)
-                            if (cellsObject[k]->getType() == "solid")
+                            if (cellsObject[k]->getType() == "solid") {
                                 flag2 = true;
+                                break;
+                            }
                     } while (flag2);
-
                     objects[j]->moveX = objects[j]->x;
                     objects[j]->moveY = objects[j]->y;
                     objects[j]->y = y;
@@ -63,6 +63,14 @@ void Table::update(const std::string &color) {
                 //////////////////ДВИЖЕНИЕ СОЛДАТ////////////////////////////////////////////////////
                 if (objects[j]->x != objects[j]->moveX || objects[j]->y != objects[j]->moveY) {
                     container<Cell *> cellsObject = getCellsObject(objects[j]);//ячейки которым принадлежит unit
+                    //sf::Sprite sprite;
+//                    for(int o=0; o<cellsObject.size(); o++){
+//                        //sprite.setTexture(tileSetImage_);//ссылка на файл с текстурами
+//                        sprite.setTextureRect(sf::Rect(0,0,0,0));
+//                        sprite.setPosition(cellsObject[o]->getX(), cellsObject[o]->getX());//задаем положение тайла
+//                        sprite.setColor(sf::Color(255, 0, 0, 100));
+//                        window->draw(sprite);
+//                    }
 
                     ///////////определяем столкновение с solid//////////////////////////////////
                     //массив соседних ячеек с лавой
@@ -84,11 +92,12 @@ void Table::update(const std::string &color) {
                             if (nearSolids[k] ==
                                 getCell(cellsObject[l]->getX() + x, cellsObject[l]->getY() + y)) {
                                 flag = false;
-                                objects[j]->moveX = objects[j]->x -  x;
-                                objects[j]->moveY = objects[j]->y -  y;
+                                objects[j]->y -= y;
+                                objects[j]->x -= x;
+                                objects[j]->moveX = objects[j]->x;
+                                objects[j]->moveY = objects[j]->y;
                                 break;
                             }
-
                         }
                     if (flag) {
                         for (int k = 0; k < cellsObject.size(); k++)
@@ -99,10 +108,12 @@ void Table::update(const std::string &color) {
                         cellsObject = getCellsObject(objects[j]);
                         for (int k = 0; k < nearSolids.size(); k++) {
                             for (int l = 0; l < cellsObject.size(); l++) {
-                                if (nearSolids[k]->getX() == cellsObject[l]->getX() &&
-                                    (nearSolids[k]->getY() == cellsObject[j]->getY())) {
+                                if (nearSolids[k] == cellsObject[l])
+                                    /*getCell(cellsObject[l]->getX()*//* + x*//*, cellsObject[l]->getY()*//* + y*//*))*/ {
                                     objects[j]->y -= y;
                                     objects[j]->x -= x;
+                                    objects[j]->moveX = objects[j]->x;
+                                    objects[j]->moveY = objects[j]->y;
                                 }
                             }
                         }
@@ -136,8 +147,10 @@ void Table::update(const std::string &color) {
                         this->pushObject(objects[j]);
                         cellsObject = getCellsObject(objects[j]);
                         for (int k = 0; k < cellsObject.size(); k++)
-                            if (cellsObject[k]->getType() == "solid")
+                            if (cellsObject[k]->getType() == "solid") {
                                 flag1 = true;
+                                break;
+                            }
                     } while (flag1);
 
                     objects[j]->sprite.setPosition(objects[j]->x, objects[j]->y);
@@ -148,11 +161,11 @@ void Table::update(const std::string &color) {
     }
 }
 
-container<Object *> Table::getObjects(int x, int y, int width, int height, std::string &color) {
+container<Object *> Table::getObjects(float x, float y, int width, int height, std::string &color) {
     container<Object *> objects;
     if (width != 0 && height != 0)
-        for (int j = y; j <= y + height; j += 32)
-            for (int i = x; i <= x + width; i += 32) {
+        for (float j = y; j <= y + height; j += 32)
+            for (float i = x; i <= x + width; i += 32) {
                 std::vector<Object *> Obj = this->getCells()[index(i, j, width_)]->getObjects();
                 for (int k = 0; k < Obj.size(); k++) {
                     Object *object = Obj[k];
@@ -170,7 +183,7 @@ container<Object *> Table::getObjects(int x, int y, int width, int height, std::
                 }
             }
     else {
-        container<Object *> Obj = this->getCell(x, y)->getObjects();
+        std::vector<Object *> Obj = this->getCell(x, y)->getObjects();
         if (Obj.size() > 0) {
             Object *obj = Obj[Obj.size() - 1];
             if (obj->color == color)
@@ -182,28 +195,44 @@ container<Object *> Table::getObjects(int x, int y, int width, int height, std::
 
 void Table::pushObject(Object *object) {
     std::vector<Cell *> cells = this->getCells();
-    int a = int(object->width + int(object->x) % 32) / 32 + 1;
-    int b = int(object->height + int(object->y) % 32) / 32 + 1;
+    int a = int(object->width + int(object->x) % 32), b = int(object->height + int(object->y) % 32);
+
+    if (a % 32 > 0)
+        a = a / 32 + 1;
+    else
+        a = a / 32;
+
+    if (b % 32 > 0)
+        b = b / 32 + 1;
+    else
+        b = b / 32;
+
     for (int i = 0; i < a; i++)
         for (int j = 0; j < b; j++) {
-            cells[index(object->x + i * 32, object->y + j * 32, width_)]->setObject(object);
+            int ind=index(object->x + i * 32, object->y + j * 32, width_);
+            cells[ind]->setObject(object);
         }
-//    for (int i = object->x; i < object->x + object->width + cells[0]->getSize(); i += cells[0]->getSize()) {
-//        for (int j = object->y; j < object->y + object->height + cells[0]->getSize(); j += cells[0]->getSize()) {
-//            cells[index(i, j, width_)]->setObject(object);
-//        }
-//    }
 }
 
 int index(float x, float y, int width) {
-    return int(x / 32 + y / 32 * width);
+    return int(int(x) / 32 + int(y) / 32 * float(width));
 }
 
 container<Cell *> Table::getCellsObject(Object *object) {
     container<Cell *> cells;
 
-    int a = int(object->width + int(object->x) % 32) / 32 + 1;
-    int b = int(object->height + int(object->y) % 32) / 32 + 1;
+    int a = int(object->width + int(object->x) % 32), b = int(object->height + int(object->y) % 32);
+
+    if (a % 32 > 0)
+        a = a / 32 + 1;
+    else
+        a = a / 32;
+
+    if (b % 32 > 0)
+        b = b / 32 + 1;
+    else
+        b = b / 32;
+
     for (int i = 0; i < a; i++)
         for (int j = 0; j < b; j++) {
             cells.push_back(cells_[index(object->x + i * 32, object->y + j * 32, width_)]);
@@ -218,9 +247,65 @@ container<Cell *> Table::getNearObjects(Object *object) {
     Object *Obj;
     std::vector<Object *> objects;
 
+    int a = int(object->width + int(object->x) % 32), b = int(object->height + int(object->y) % 32);
+
+    if (a % 32 > 0)
+        a = a / 32 + 1;
+    else
+        a = a / 32;
+
+    if (b % 32 > 0)
+        b = b / 32 + 1;
+    else
+        b = b / 32;
+
+
+    for (int i = -1; i < a + 1; i++) {
+        cell = this->getCell(object->x + i * 32, object->y - 32);
+        objects = cell->getObjects();
+        for (int j = 0; j < objects.size(); j++) {
+            Obj = objects[j];
+            if (Obj != nullptr && Obj != object)
+                cells.push_back(cell);
+        }
+    }
+    objects.clear();
     //вверх
-    for (float i = object->x - 32; i < object->x + object->width + 32; i += 32) {
-        cell = this->getCell(i, object->y - 32);
+//    for (float i = object->x - 32; i < object->x + object->width + 32; i += 32) {
+//        cell = this->getCell(i, object->y - 32);
+//        objects = cell->getObjects();
+//        for (int j = 0; j < objects.size(); j++) {
+//            Obj = objects[j];
+//            if (Obj != nullptr && Obj != object)
+//                cells.push_back(cell);
+//        }
+//    }
+//    objects.clear();
+
+    for (int i = 0; i < b; i++) {
+        cell = this->getCell(object->x - 32, object->y + i * 32);
+        objects = cell->getObjects();
+        for (int j = 0; j < objects.size(); j++) {
+            Obj = objects[j];
+            if (Obj != nullptr && Obj != object)
+                cells.push_back(cell);
+        }
+    }
+    objects.clear();
+//
+//    //сверху вниз края
+//    for (int i = object->y; i < object->y + object->height + 32; i += 32) {
+//        cell = this->getCell(object->x - 32, i);
+//        for (int j = 0; j < objects.size(); j++) {
+//            Obj = objects[j];
+//            if (Obj != nullptr && Obj != object)
+//                cells.push_back(cell);
+//        }
+//    }
+//    objects.clear();
+
+    for (int i = 0; i < b; i++) {
+        cell = this->getCell(object->x + a * 32 + 32, object->y + i * 32);
         objects = cell->getObjects();
         for (int j = 0; j < objects.size(); j++) {
             Obj = objects[j];
@@ -230,19 +315,19 @@ container<Cell *> Table::getNearObjects(Object *object) {
     }
     objects.clear();
 
-    //сверху вниз края
-    for (int i = object->y; i < object->y + object->height + 32; i += 32) {
-        cell = this->getCell(object->x - 32, i);
-        for (int j = 0; j < objects.size(); j++) {
-            Obj = objects[j];
-            if (Obj != nullptr && Obj != object)
-                cells.push_back(cell);
-        }
-    }
-    objects.clear();
+//    for (int i = object->y; i < object->y + object->height + 32; i += 32) {
+//        cell = this->getCell(object->x + object->width + 32, i);
+//        objects = cell->getObjects();
+//        for (int j = 0; j < objects.size(); j++) {
+//            Obj = objects[j];
+//            if (Obj != nullptr && Obj != object)
+//                cells.push_back(cell);
+//        }
+//    }
+//    objects.clear();
 
-    for (int i = object->y; i < object->y + object->height + 32; i += 32) {
-        cell = this->getCell(object->x + object->width + 32, i);
+    for (int i = -1; i < a + 1; i++) {
+        cell = this->getCell(object->x + i * 32, object->y + b * 32 + 32);
         objects = cell->getObjects();
         for (int j = 0; j < objects.size(); j++) {
             Obj = objects[j];
@@ -252,17 +337,17 @@ container<Cell *> Table::getNearObjects(Object *object) {
     }
     objects.clear();
 
-    //низ
-    for (int i = object->x - 32; i < object->x + object->width + 32; i += 32) {
-        cell = this->getCell(i, object->y + object->height + 32);
-        objects = cell->getObjects();
-        for (int j = 0; j < objects.size(); j++) {
-            Obj = objects[j];
-            if (Obj != nullptr && Obj != object)
-                cells.push_back(cell);
-        }
-    }
-    objects.clear();
+//    //низ
+//    for (int i = object->x - 32; i < object->x + object->width + 32; i += 32) {
+//        cell = this->getCell(i, object->y + object->height + 32);
+//        objects = cell->getObjects();
+//        for (int j = 0; j < objects.size(); j++) {
+//            Obj = objects[j];
+//            if (Obj != nullptr && Obj != object)
+//                cells.push_back(cell);
+//        }
+//    }
+//    objects.clear();
     return cells;
 }
 
@@ -270,31 +355,53 @@ container<Cell *> Table::getSolidCells(Object *object) {
     container<Cell *> cells;
     Cell *cell;
 
-    //вверх
-    for (int i = object->x - 32; i < object->x + object->width + 32; i += 32) {
-        cell = this->getCell(i, object->y - 32);
+    int a = int(object->width + int(object->x) % 32), b = int(object->height + int(object->y) % 32);
+
+    if (a % 32 > 0)
+        a = a / 32 + 1;
+    else
+        a = a / 32;
+
+    if (b % 32 > 0)
+        b = b / 32 + 1;
+    else
+        b = b / 32;
+
+
+
+    for (int i = -1; i < a + 1; i++) {
+        cell = this->getCell(object->x + i * 32, object->y - 32);
+        //вверх
+//    for (int i = object->x - 32; i < object->x + object->width + 32; i += 32) {
+//        cell = this->getCell(i, object->y - 32);
         if (cell->getType() == "solid") {
             cells.push_back(cell);
         }
     }
 
-    for (int i = object->y; i < object->y + object->height + 32; i += 32) {
-        cell = this->getCell(object->x - 32, i);
+    for (int i = 0; i < b; i++) {
+        cell = this->getCell(object->x - 32, object->y + i * 32);
+//    for (int i = object->y; i < object->y + object->height + 32; i += 32) {
+//        cell = this->getCell(object->x - 32, i);
         if (cell->getType() == "solid") {
             cells.push_back(cell);
         }
     }
 
-    for (int i = object->y; i < object->y + object->height + 32; i += 32) {
-        cell = this->getCell(object->x + object->width + 32, i);
+    for (int i = 0; i < b; i++) {
+        cell = this->getCell(object->x + a * 32 + 32, object->y + i * 32);
+//        for (int i = object->y; i < object->y + object->height + 32; i += 32) {
+//        cell = this->getCell(object->x + object->width + 32, i);
         if (cell->getType() == "solid") {
             cells.push_back(cell);
         }
     }
 
-    //низ
-    for (int i = object->x - 32; i < object->x + object->width + 32; i += 32) {
-        cell = this->getCell(i, object->y + object->height + 32);
+    for (int i = -1; i < a + 1; i++) {
+        cell = this->getCell(object->x + i * 32, object->y + b * 32 + 32);
+        //низ
+//    for (int i = object->x - 32; i < object->x + object->width + 32; i += 32) {
+//        cell = this->getCell(i, object->y + object->height + 32);
         if (cell->getType() == "solid") {
             cells.push_back(cell);
         }

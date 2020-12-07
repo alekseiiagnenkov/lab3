@@ -1,9 +1,9 @@
 #include "Cell.h"
 
-Cell::Cell(int x, int y, Object *object, int type) {
+Cell::Cell(int x, int y, Object *object, int ID) {
     this->x_ = x;
     this->y_ = y;
-    if (type == 9 || type == 7 || type == 8)
+    if (ID == 9)
         this->type_ = "solid";
     else
         this->type_ = "free";

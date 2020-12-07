@@ -2,7 +2,7 @@
 
 #include "SFML/Graphics.hpp"
 #include <iostream>
-
+#include <cmath>
 
 // В картах TMX объект - это область на карте, имеющая имя, тип,
 //  границы, набор пользовательских свойств (в формате ключ-значение)
@@ -29,6 +29,6 @@ public:
 
     void updateMove();
 
-    sf::Vector2i getCoord();
+    sf::Vector2f getCoord();
 
 };

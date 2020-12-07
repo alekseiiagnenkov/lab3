@@ -229,7 +229,7 @@ void doPlayerEvents(bool *flag, bool *flagClick, bool *flagZoneClick,
 
     //объекты в выделенной области
     if (*flagClick || *flagZoneClick) {
-        objects = level->T->getObjects(int(x), int(y), width, height,
+        objects = level->T->getObjects(x,y, width, height,
                                        level->colonies_[OUR_LAIR]->getColor());
     }
 
@@ -360,7 +360,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
             }
         }
 
-        level->T->update(COLOR[OUR_LAIR]);
+        level->T->update(COLOR[OUR_LAIR], window);
 
         int j, k;
 

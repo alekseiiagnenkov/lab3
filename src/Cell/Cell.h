@@ -12,7 +12,7 @@ private:
     int size_ = 32;
 public:
     //CONSTRUCTORS
-    Cell(int x, int y, Object *object, int type);
+    Cell(int x, int y, Object *object, int ID);
 
     //Cell(int x, int y, std::vector<Object *> objects, int type);
 
