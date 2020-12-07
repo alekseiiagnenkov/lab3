@@ -1,8 +1,11 @@
 #pragma once
 
 #include "../Object/Object.h"
-//#include "../../lib/MyContainer/Container.h"
 
+/**
+ * Класс клетки поля.
+ * Создан для удобной работы с полем, столкновений с лавой, поиска объектов
+ */
 class Cell {
 private:
     std::vector<Object *> objects_;
@@ -11,26 +14,38 @@ private:
     int y_;
     int size_ = 32;
 public:
-    //CONSTRUCTORS
+
     Cell(int x, int y, Object *object, int ID);
 
-    //Cell(int x, int y, std::vector<Object *> objects, int type);
-
-    //GETTERS
-    //Object *getObject() { return this->object_; }
-
+    /**
+    * Координата Х данной клетки
+    */
     int getX() { return this->x_; }
 
+    /**
+    * Координата Y данной клетки
+    */
     int getY() { return this->y_; }
 
+    /**
+    * Размер ячейки
+    */
     int getSize() { return this->size_; }
 
+    /**
+    * Возвращаем тип ячейки. Может быть твердый(лава) или свободный(пустыня)
+    */
     std::string getType() { return this->type_; }
 
+    /**
+    * Получаем массив объектов, которые принадлежат данной клетке
+    */
     std::vector<Object *>& getObjects() { return this->objects_; }
 
 
-    //SETTERS
+    /**
+    * Присваиваем ячейке объект
+    */
     void setObject(Object *object) {
         if (object != nullptr)
             this->objects_.push_back(object);
@@ -39,8 +54,8 @@ public:
         }
     }
 
+    /**
+    * Удаляем определенный объект из данной ячейки
+    */
     void deleteObject(Object *object);
-
-    void deleteLastObject();
-
 };

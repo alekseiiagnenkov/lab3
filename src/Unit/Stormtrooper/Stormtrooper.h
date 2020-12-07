@@ -2,28 +2,34 @@
 
 #include"../Unit.h"
 
+/**
+* Класс юнита- штурмовик
+*/
 class Stormtrooper : public Unit {
 private:
     int damage_;
-    int take_;
 public:
     //CONSTRUCTORS
-    Stormtrooper (int level);
-    Stormtrooper(std::string name, std::string type, std::string  color,
+    Stormtrooper(int level);
+
+    Stormtrooper(std::string name, std::string type, std::string color,
                  int x, int y, int w, int h, int lvl, int health);
 
 
     //GETTERS
+    /**
+    * Получить урон юнитам и логовам
+    */
     int getDamage() { return this->damage_; }
 
-    int getTake() { return this->take_; }
-
     //SETTERS
+    /**
+    * Изменить урон
+    */
     void setDamage(int damage) { this->damage_ = damage; }
 
-    void setTake(int take) { this->take_ = take; }
-
-    void attackUnit(Unit* U, int a);
-
-    //void attackLair(Lair* L) { U->setHealth(U->getHealth() - this->damage_);}
+    /**
+    * Атаковать юнита
+    */
+    void attackUnit(Unit *U, int a);
 };

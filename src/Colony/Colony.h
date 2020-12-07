@@ -1,67 +1,112 @@
 #pragma once
 
-//#include "../Table/Table.h"
-//#include "../Unit/Unit.h"
 #include "../Lair/Lair.h"
 #include "../Army/Army.h"
 #include "../TableOfResource/TableOfResource.h"
 #include<vector>
 #include <string>
 
+/**
+* Класс колония
+*/
 class Colony {
 private:
     std::string color_;
     int acid_;
     int salt_;
     int food_;
-    container<Object*> resources_;
+    container<Object *> resources_;
     Lair *lair_;
     Army *army_;
-    TableOfResource* TR;
+    TableOfResource *TR;
 public:
-    //CONSTRUCTORS
 
-    Colony(int acid, int salt, int food, Lair *lair, std::string& color, Army*);
+    Colony(int acid, int salt, int food, Lair *lair, std::string &color, Army *);
 
 
-    //GETTERS
+    /**
+    * Получаем лового данной колонии
+    */
     Lair *getLair() { return this->lair_; }
 
+    /**
+    * Кол-во еды
+    */
     int getFood() { return this->food_; }
 
+    /**
+    * Кол-во кислоты
+    */
     int getAcid() { return this->acid_; }
 
-    int getSold() { return this->salt_; }
+    /**
+    * Кол-во соли
+    */
+    int getSalt() { return this->salt_; }
 
-   container<Object*> getResources() { return this->resources_;}
+    /**
+    * Захваченные ресурсные точки
+    */
+    container<Object *> getResources() { return this->resources_; }
 
-    std::string& getColor() { return this->color_; }
+    /**
+    * Получаем цвет данной колонии
+    */
+    std::string &getColor() { return this->color_; }
 
-    Army* getArmy() {return this->army_;}
+    /**
+    * Получаем армию колонии
+    */
+    Army *getArmy() { return this->army_; }
 
-    TableOfResource* getTableOfResource() {return this->TR;}
+    /**
+    * Ресурсная таблица, чтобы игрок видел кол-во ресурсов
+    */
+    TableOfResource *getTableOfResource() { return this->TR; }
 
 
     //SETTERS
+    /**
+    * Присваиваем колонии логово
+    */
     void setLair(Lair *lair) { this->lair_ = lair; }
 
+    /**
+    * Изменяем кол-во еды
+    */
     void setFood(int food) { this->food_ = food; }
 
+    /**
+    * Изменяем кол-во кислоты
+    */
     void setAcid(int acid) { this->acid_ = acid; }
 
-    void setSold(int sold) { this->salt_ = sold; }
+    /**
+    * Изменяем кол-во соли
+    */
+    void setSalt(int salt) { this->salt_ = salt; }
 
-    void setArmy(Army* army) { this->army_ = army; }
+    /**
+    * Присваиваем армию, нужно при создании, когда мы загружаем юнитов
+    */
+    void setArmy(Army *army) { this->army_ = army; }
 
-    void setResource(Object* resource) { this->resources_.push_back(resource); }
+    /**
+    * Добавляем захваченный ресурс
+    */
+    void setResource(Object *resource) { this->resources_.push_back(resource); }
 
     //FUNCTION
 
-    void drawTableOfResource(sf::RenderWindow *window, sf::Font& font);
+    /**
+    * Вырисовываем таблицу ресурсов
+    * @param font шрифт вывода
+    */
+    void drawTableOfResource(sf::RenderWindow *window, sf::Font &font);
 
-    bool wasteResources (container<int> waste);
-
-    void updateResources();
-
-
+    /**
+    * Проверяем, можем ли мы потратить данное кол-во ресурсов
+     * @param waste массив ресурсов, необходимых, чтобы создать юнита
+    */
+    bool wasteResources(container<int> waste);
 };

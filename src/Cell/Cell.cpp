@@ -18,7 +18,3 @@ void Cell::deleteObject(Object *object) {
             this->objects_.erase(i + begin);
         }
 }
-
-void Cell::deleteLastObject() {
-    this->objects_.pop_back();
-}

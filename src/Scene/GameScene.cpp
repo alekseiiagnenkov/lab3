@@ -42,7 +42,7 @@ void mainGameLoop(Window &window, OnUpdate onUpdate, void *pData) {
 
     GameScene *gameScene = reinterpret_cast<GameScene *>(pData);
     container<Object *> objects;
-    Lair *lair = nullptr;
+    //Lair *lair = nullptr;
 
 
     // create a view half the size of the default view
@@ -127,8 +127,7 @@ void mainGameLoop(Window &window, OnUpdate onUpdate, void *pData) {
 
 /////////////////////// если куда то тыкнули или выделили область////////////////////////
         doPlayerEvents(&flag, &flagClick, &flagZoneClick, objects, x, y, x1, y1, width, height, &gameScene->level,
-                       &window,
-                       lair, font);
+                       &window, font);
 /////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -170,8 +169,9 @@ void doPlayerEvents(bool *flag, bool *flagClick, bool *flagZoneClick,
                     container<Object *> &objects,
                     float x, float y, float x1, float y1,
                     int width,
-                    int height, Level *level, Window *window, Lair *&lair, sf::Font &font) {
+                    int height, Level *level, Window *window, sf::Font &font) {
 
+    Lair* lair = level->colonies_[OUR_LAIR]->getLair();
     //если в прошлый раз тыкнули на UNIT, то указываем ему куда идти
     if (*flag && *flagClick) {
         std::cout << objects.size() << std::endl;

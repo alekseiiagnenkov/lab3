@@ -13,5 +13,5 @@ void SaltPoint::Repopulate(Colony *colony) {
 }
 
 void SaltPoint::toIncrease(Colony *colony) {
-    colony->setSold(colony->getSold() + this->getIncrease());
+    colony->setSalt(colony->getSalt() + this->getIncrease());
 }

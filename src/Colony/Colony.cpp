@@ -24,7 +24,3 @@ bool Colony::wasteResources(container<int> waste) {
     } else
         return false;
 }
-
-void Colony::updateResources(){
-    for(int i=0; i<this->resources_.size(); i++);
-}

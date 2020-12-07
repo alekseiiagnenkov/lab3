@@ -7,6 +7,9 @@
 #include "../Unit/Usual/Usual.h"
 #include "../../lib/MyContainer/Container.h"
 
+/**
+ * Класс таблицы создания юнитов
+ */
 class TableOfUnits {
 private:
     Cleaner* cleaner_;
@@ -25,14 +28,29 @@ public:
 
     ~TableOfUnits();
 
+    /**
+     * Создаем шаблоны юнитов, чтобы знать какие параметры будут у них при создании
+     */
     void newUnits(int level);
 
+    /**
+     * Получаем текстуру таблицы
+     */
     sf::Texture &getTexture() { return this->texture; }
 
+    /**
+     * Получаем спрайт
+     */
     sf::Sprite &getSprite() { return this->background; }
 
+    /**
+     * Рисуем таблицу с юнитами определнного уровня
+     */
     void draw(int level, sf::RenderWindow* window, sf::Font&);
 
-    container<int> getCost(int );
+    /**
+     * Получаем стоимость определенного юнита
+     */
+    container<int> getCost(int nomber);
 
 };
