@@ -22,7 +22,3 @@ Cleaner::Cleaner(int lvl) {
     this->setMaxHealth(30 * lvl + 70);
     this->setHealth((this->getMaxHealth()));
 }
-
-void Cleaner::attackResource(Object* resource) {
-
-}
