@@ -1,8 +1,12 @@
 #include "Lair.h"
 
 Lair::Lair(std::string name, std::string type, std::string color,
-           float x, float y, int w, int h, int lvl, int health) : Object(name, type, color, x, y, w, h) {
-    this->level_ = lvl;
+           float x, float y, int w, int h, int level, int health) : Object(name, type, color, x, y, w, h) {
+    if(level<0) {
+        std::cout<<"Lair[#6] Invalid level"<<std::endl;
+        throw std::exception();
+    }
+    this->level_ = level;
     this->maxHealth_ = this->level_ * 1000;
     this->health_ = health;
     this->TU = new TableOfUnits;

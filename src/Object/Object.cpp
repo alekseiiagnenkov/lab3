@@ -1,9 +1,13 @@
 #include "Object.h"
 
 //const float SPEED=0.25;
-const float SPEED=0.9;
+const float SPEED = 0.9;
 
-Object::Object(std::string &name, std::string &type, std::string& color, float x, float y, int w, int h) {
+Object::Object(std::string &name, std::string &type, std::string &color, float x, float y, int w, int h) {
+    if (x < 0 || y < 0 || h < 0 || w < 0) {
+        std::cout << "Object[#8] Invalid param " << std::endl;
+        throw std::exception();
+    }
     this->x = x;
     this->y = y;
     this->moveY = y;
@@ -14,8 +18,10 @@ Object::Object(std::string &name, std::string &type, std::string& color, float x
     this->type = type;
     this->color = color;
     sf::Image img;
-    if (!img.loadFromFile("../res/image/" + color + "/" + name + ".png"))
-        std::cout << "No loaded " << color <<" "<< name << std::endl;
+    if (!img.loadFromFile("../res/image/" + color + "/" + name + ".png")) {
+        std::cout << "Object[#20] No loaded " << color << " " << name << std::endl;
+        throw std::exception();
+    }
     texture.loadFromImage(img);
     sprite.setPosition(x, y);
     sprite.setTexture(texture);
@@ -25,8 +31,8 @@ Object::Object(std::string &name, std::string &type, std::string& color, float x
 void Object::updateMove() {
 
     if (x != moveX) {
-        if(std::fabs(x-moveX)<SPEED)
-            x=moveX;
+        if (std::fabs(x - moveX) < SPEED)
+            x = moveX;
         else {
             if (x < moveX)
                 x += SPEED;
@@ -35,8 +41,8 @@ void Object::updateMove() {
         }
     }
     if (y != moveY) {
-        if(std::fabs(y-moveY)<SPEED)
-            y=moveY;
+        if (std::fabs(y - moveY) < SPEED)
+            y = moveY;
         else {
             if (y < moveY)
                 y += SPEED;

@@ -42,7 +42,6 @@ public:
     */
     std::vector<Object *>& getObjects() { return this->objects_; }
 
-
     /**
     * Присваиваем ячейке объект
     */

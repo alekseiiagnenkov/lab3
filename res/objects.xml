@@ -51,16 +51,9 @@
 
         <resource acid="200" salt="200" food="200"/>
 
-        <object name="lair" type="lair" x="2650" y="2800" width="128" height="96">
+        <object name="lair" type="lair" x="600" y="600" width="128" height="96">
             <properties>
                 <property name="health" value="1000"/>
-                <property name="level" value="1"/>
-            </properties>
-        </object>
-
-        <object name="stormtrooper" type="unit" x="2650" y="2730" width="49" height="63">
-            <properties>
-                <property name="health" value="100"/>
                 <property name="level" value="1"/>
             </properties>
         </object>

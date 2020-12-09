@@ -1,6 +1,10 @@
 #include "Cell.h"
 
 Cell::Cell(int x, int y, Object *object, int ID) {
+    if( ID<0 || x<0 || y<0){
+        std::cout<<"Cell[#5] Invalid param"<<std::endl;
+        throw std::exception();
+    }
     this->x_ = x;
     this->y_ = y;
     if (ID == 9)

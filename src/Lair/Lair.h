@@ -19,7 +19,7 @@ public:
 
     //CONSTRUCTORS
     Lair(std::string name, std::string type, std::string color,
-         float x, float y, int w, int h, int lvl, int health);
+         float x, float y, int w, int h, int level, int health);
 
     /**
     * Уровень логова
