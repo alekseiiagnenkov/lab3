@@ -2,7 +2,7 @@
 
 // Абсолютная скорость движения наблюдателя.
 static const float WATCHER_SPEED = 500;
-static const int OUR_LAIR = 1;
+static const int OUR_LAIR = 0;
 static const container<std::string> COLOR = {"green", "red"};
 
 //создание окна
@@ -522,6 +522,30 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
 }
 
 void destroyGameScene(GameScene *&gameScene) {
+    for(int i=0; i<gameScene->level.colonies_.size(); i++){
+        Colony* colony = gameScene->level.colonies_[0];
+        Army* army=colony->getArmy();
+        container<Stormtrooper*> stormtroopers=army->getStormtroopers();
+        container<Cleaner*> cleaners=army->getCleaners();
+        container<Usual*> usuals=army->getUsuals();
+        container<Hunter*> hunters=army->getHunters();
+
+        for(int j=0; j<stormtroopers.size();j++){
+            delete stormtroopers[j];
+        }
+        for(int j=0; j<cleaners.size();j++){
+            delete cleaners[j];
+        }
+        for(int j=0; j<usuals.size();j++){
+            delete usuals[j];
+        }
+        for(int j=0; i<hunters.size();j++){
+            delete hunters[j];
+        }
+        //delete colony->getLair()->getTableOfUnits();
+        delete colony->getLair();
+        delete colony->getTableOfResource();
+    }
     delete gameScene;
     gameScene = nullptr;
 }

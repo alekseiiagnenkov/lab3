@@ -5,6 +5,11 @@ project(Game)
 set(CMAKE_CXX_STANDARD 17)
 # set(SOURCE_FILES main.cpp)
 
+# set(gtest_disable_pthreads on) #needed in MinGW
+add_executable(
+        runGTests
+        GoogleTests/gtest.cpp)
+
 add_executable(
         Game main.cpp
 
@@ -67,9 +72,9 @@ add_executable(
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/lib/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 2 REQUIRED system window graphics network audio)
 
-add_subdirectory(lib/GoogleTest/)
-
 if(SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
+    target_link_libraries(runGTests ${SFML_LIBRARIES})
+    target_link_libraries(runGTests gtest gtest_main)
 endif()
