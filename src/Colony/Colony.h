@@ -74,17 +74,28 @@ public:
     /**
     * Изменяем кол-во еды
     */
-    void setFood(int food) { this->food_ = food; }
+    void setFood(int food) {
+        if (food < 0)
+            throw std::exception();
+        this->food_ = food;
+    }
 
     /**
     * Изменяем кол-во кислоты
     */
-    void setAcid(int acid) { this->acid_ = acid; }
+    void setAcid(int acid) {
+        if (acid < 0)
+            throw std::exception();
+        this->acid_ = acid;
+    }
 
     /**
     * Изменяем кол-во соли
     */
-    void setSalt(int salt) { this->salt_ = salt; }
+    void setSalt(int salt) {
+        if(salt<0)
+            throw std::exception();
+        this->salt_ = salt; }
 
     /**
     * Присваиваем армию, нужно при создании, когда мы загружаем юнитов

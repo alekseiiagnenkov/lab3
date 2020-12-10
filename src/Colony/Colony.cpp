@@ -1,6 +1,10 @@
 #include "Colony.h"
 
 Colony::Colony(int acid, int salt, int food, Lair *lair, std::string &color, Army *army) {
+    if(acid<0 || salt<0 || food<0){
+        std::cout << "Colony[#5] Invalid resource " << std::endl;
+        throw std::exception();
+    }
     this->acid_ = acid;
     this->food_ = food;
     this->salt_ = salt;

@@ -2,6 +2,14 @@
 
 
 Table::Table(int width, int height, std::vector<Cell *> &cells) {
+    if(width <=0 || height <=0 ){
+            std::cout << "Table[#6] Invalid param size " << std::endl;
+            throw std::exception();
+        }
+    if((cells.size()!=width*height)){
+        std::cout << "Table[#10] Invalid number cells " << std::endl;
+        throw std::exception();
+    }
     this->width_ = width;
     this->height_ = height;
     this->cells_ = cells;

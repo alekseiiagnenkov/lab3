@@ -40,16 +40,30 @@ private:
     int tileHeight_, tileWidth_, firstTileID_, height_, width_;
     sf::Texture tileSetImage_;
     std::vector<Layer> layers_;
-public:
     Table *T;
-
     container<ResourcePoint *> resources_;
     container<Colony *> colonies_;
+public:
 
     /**
     * Загружает карту по пути
     */
     bool loadMapFromFile(const std::string &filepath);
+
+    /**
+    * Таблица
+    */
+    Table *getTable() { return this->T; }
+
+    /**
+    * Ресурсы
+    */
+    container<ResourcePoint *> getResources() { return this->resources_; }
+
+    /**
+    * Колонии
+    */
+    container<Colony *> getColonies() { return this->colonies_; }
 
     /**
     * Загружает по пути объекты на карте: логово, юнитов, ресурсные точки

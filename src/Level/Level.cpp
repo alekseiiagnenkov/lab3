@@ -35,7 +35,6 @@ std::string joinPaths(const std::string &path, const std::string &subpath) {
 bool Level::loadMapFromFile(const std::string &filepath) {
     XMLDocument levelFile;
     std::vector<Cell *> cells;
-    //container<Cell *> cells;
 
     // Загружаем файл в память
     if (levelFile.LoadFile(filepath.c_str()) != XML_SUCCESS) {

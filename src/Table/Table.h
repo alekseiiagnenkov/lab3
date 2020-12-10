@@ -17,7 +17,7 @@ private:
     std::vector<Cell *> cells_;
 public:
     //CONSTRUCTORS
-    Table(int width, int height, std::vector<Cell *> &cells );
+    Table(int width, int height, std::vector<Cell *> &cells);
 
 
     //GETTERS
@@ -42,18 +42,30 @@ public:
      * Изменить длину поля
      * @param width размер в клетках
      */
-    void setWidth(int width) { this->width_ = width; }
+    void setWidth(int width) {
+        if (width <= 0)
+            throw std::exception();
+        this->width_ = width;
+    }
 
     /**
      * Изменить высоту поля
      * @param height размер в клетках
      */
-    void setHeight(int height) { this->height_ = height; }
+    void setHeight(int height) {
+        if (height <= 0)
+            throw std::exception();
+        this->height_ = height;
+    }
 
     /**
      * Изменить массив клеток
      */
-    void setField(std::vector<Cell *> &field) { this->cells_ = field; }
+    void setField(std::vector<Cell *> &cells) {
+        if ((this->width_ * this->height_) != cells.size())
+            throw std::exception();
+        this->cells_ = cells;
+    }
 
 
     //FUNCTION
@@ -61,7 +73,7 @@ public:
      * перегружена
      * Получаем клетку по определенных координатам
      */
-    Cell *getCell(float x, float y) { return this->cells_[index(x,y, width_)]; }
+    Cell *getCell(float x, float y) { return this->cells_[index(x, y, width_)]; }
 
     /**
      * перегружена
@@ -72,7 +84,7 @@ public:
     /**
      * Получаем объекты в определнной области
      */
-    container<Object *> getObjects(float x, float y, int width, int height, std::string& color);
+    container<Object *> getObjects(float x, float y, int width, int height, std::string &color);
 
     /**
      * Добавляем объект на поле
@@ -83,7 +95,7 @@ public:
      * Обновляем положение объектов
      * @param для определение своих и чужих содлат, т.к. ведут они себя по разному
      */
-    void update(const std::string& color, sf::RenderWindow *);
+    void update(const std::string &color, sf::RenderWindow *);
 
     /**
      * Получаем все клетки, которым принадлежит данный объект
@@ -103,6 +115,6 @@ public:
     /**
      * Удаляем объект с поля
      */
-    void deleteObject(Object*);
+    void deleteObject(Object *);
 };
 

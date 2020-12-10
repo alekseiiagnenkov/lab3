@@ -13,7 +13,7 @@ public:
     Stormtrooper(int level);
 
     Stormtrooper(std::string name, std::string type, std::string color,
-                 int x, int y, int w, int h, int lvl, int health);
+                 int x, int y, int w, int h, int level, int health);
 
 
     //GETTERS
@@ -26,7 +26,10 @@ public:
     /**
     * Изменить урон
     */
-    void setDamage(int damage) { this->damage_ = damage; }
+    void setDamage(int damage) {
+        if (damage<0)
+            throw std::exception();
+        this->damage_ = damage; }
 
     /**
     * Атаковать юнита

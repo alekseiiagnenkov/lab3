@@ -6,7 +6,7 @@
 /**
  * Класс, обобщающий все ресурсы
  */
-class ResourcePoint: public Object {
+class ResourcePoint : public Object {
 private:
     std::string name_;
     Colony *colony_;
@@ -16,8 +16,8 @@ private:
 
 public:
     //CONSTRUCTORS
-    ResourcePoint(std::string &name, std::string &type, std::string &path, Colony* colony,
-    float x, float y, int width, int height, int health); //level берется из уровня логова
+    ResourcePoint(std::string &name, std::string &type, std::string &path, Colony *colony,
+                  float x, float y, int width, int height, int health); //level берется из уровня логова
 
     //GETTERS
     /**
@@ -49,22 +49,29 @@ public:
     /**
     * Изменить максимальное здоровье
     */
-    void setMaxHealth(int maxHealth) { this->maxHealth_=maxHealth; }
+    void setMaxHealth(int maxHealth) {
+        if (maxHealth < 0)
+            throw std::exception();
+        this->maxHealth_ = maxHealth;
+    }
 
     /**
     * Изменить текущее здоровье
     */
-    void setHealth(int health) { this->health_=health; }
+    void setHealth(int health) {this->health_ = health;}
 
     /**
     * Изменить сколько добавляет
     */
-    void setIncrease(int increase) { this->increase_=increase; }
+    void setIncrease(int increase) {
+        if(increase<0)
+            throw std::exception();
+        this->increase_ = increase; }
 
     /**
     * Изменить имя
     */
-    void setName(std::string& name) { this->name_ = name; }
+    void setName(std::string &name) { this->name_ = name; }
 
     /**
     * Присвоить ресурс какой либо колонии

@@ -49,17 +49,25 @@ public:
     /**
     * Изменение уровня
     */
-    void setLevel(int level) { this->level_ = level; }
+    void setLevel(int level) {
+        if(level<0)
+            throw std::exception();
+        this->level_ = level;
+    }
 
     /**
     * Изменение максимального здоровья
     */
-    void setMaxHealth(int maxHealth) { this->maxHealth_ = maxHealth; }
+    void setMaxHealth(int maxHealth) {
+        if(maxHealth<0)
+            throw std::exception();
+        this->maxHealth_ = maxHealth; }
 
     /**
     * Изменение здоровья
     */
-    void setHealth(int health) { this->health_ = health; }
+    void setHealth(int health) {
+        this->health_ = health; }
 
     /**
     * Открыта ли таблица

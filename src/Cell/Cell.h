@@ -12,7 +12,7 @@ private:
     std::string type_;
     int x_;
     int y_;
-    int size_ = 32;
+    int const size_ = 32;
 public:
 
     Cell(int x, int y, Object *object, int ID);
@@ -41,6 +41,24 @@ public:
     * Получаем массив объектов, которые принадлежат данной клетке
     */
     std::vector<Object *>& getObjects() { return this->objects_; }
+
+    /**
+    * Присваиваем Y координату
+    */
+    void setX(int x){
+        if(x<0)
+            throw std::exception();
+        this->x_=x;
+    }
+
+    /**
+    * Присваиваем X координату
+    */
+    void setY(int y){
+        if(y<0)
+            throw std::exception();
+        this->y_=y;
+    }
 
     /**
     * Присваиваем ячейке объект

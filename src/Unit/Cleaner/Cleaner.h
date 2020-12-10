@@ -13,7 +13,7 @@ public:
     Cleaner(int level);
 
     Cleaner(std::string name, std::string type, std::string color,
-            int x, int y, int w, int h, int lvl, int health);
+            int x, int y, int w, int h, int level, int health);
 
 
     //GETTERS
@@ -27,5 +27,8 @@ public:
     /**
     * Изменить урон по ресурсам
     */
-    void setTake(int take) { this->take_ = take; }
+    void setTake(int take) {
+        if (take<0)
+            throw std::exception();
+        this->take_ = take; }
 };

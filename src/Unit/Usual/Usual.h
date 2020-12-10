@@ -14,7 +14,7 @@ public:
     Usual(int level);
 
     Usual(std::string name, std::string type, std::string color,
-          int x, int y, int w, int h, int lvl, int health);
+          int x, int y, int w, int h, int level, int health);
 
 
     //GETTERS
@@ -33,12 +33,18 @@ public:
     /**
     * Изменить урон по юнитам
     */
-    void setDamage(int damage) { this->damage_ = damage; }
+    void setDamage(int damage) {
+        if (damage<0)
+            throw std::exception();
+        this->damage_ = damage; }
 
     /**
     * Изменить урон по нейтральным ресурсным точкам
     */
-    void setTake(int take) { this->take_ = take; }
+    void setTake(int take) {
+        if (take<0)
+            throw std::exception();
+        this->take_ = take; }
 
     /**
     * Атаковать юнита

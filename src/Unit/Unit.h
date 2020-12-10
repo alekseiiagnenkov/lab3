@@ -65,7 +65,10 @@ public:
     /**
      * Изменить макс здоровье
      */
-    void setMaxHealth(int maxHealth) { this->maxHealth_ = maxHealth; }
+    void setMaxHealth(int maxHealth) {
+        if (maxHealth<0)
+            throw std::exception();
+        this->maxHealth_ = maxHealth; }
 
     /**
      * Изменить текущее здоровье
@@ -80,17 +83,26 @@ public:
     /**
      * Изменить вероятность увернуться
      */
-    void setDodge(double dodge) { this->dodge_ = dodge; }
+    void setDodge(double dodge) {
+        if (dodge<0 || dodge >1)
+            throw std::exception();
+        this->dodge_ = dodge; }
 
     /**
      * Изменить урон по ресурсным точкам
      */
-    void setIntake(int intake) { this->intake_ = intake; }
+    void setIntake(int intake) {
+        if (intake<0)
+            throw std::exception();
+        this->intake_ = intake; }
 
     /**
      * Изменить уровень
      */
-    void setLevel(int level) { this->level_ = level; }
+    void setLevel(int level) {
+        if (level<0)
+            throw std::exception();
+        this->level_ = level; }
 
     /**
      * Изменить название

@@ -28,8 +28,6 @@
 */
   struct GameScene {
     Level level;
-    //std::vector<Object> staticObjects;
-    //std::vector<Object> dynamicObjects;
 };
 
   /**

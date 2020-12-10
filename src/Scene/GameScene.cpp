@@ -133,7 +133,7 @@ void mainGameLoop(Window &window, OnUpdate onUpdate, void *pData) {
 
 
 /////////////////////////-------WIN-------------/////////////////////////////////////////
-        if (gameScene->level.colonies_.size() == 1) {
+        if (gameScene->level.getColonies().size() == 1) {
             window.window_.setView(window.window_.getDefaultView());
             flagWin = true;
             sf::Text win1("WINNER WINNER", font, 100);
@@ -171,7 +171,7 @@ void doPlayerEvents(bool *flag, bool *flagClick, bool *flagZoneClick,
                     int width,
                     int height, Level *level, Window *window, sf::Font &font) {
 
-    Lair* lair = level->colonies_[OUR_LAIR]->getLair();
+    Lair* lair = level->getColonies()[OUR_LAIR]->getLair();
     //если в прошлый раз тыкнули на UNIT, то указываем ему куда идти
     if (*flag && *flagClick) {
         std::cout << objects.size() << std::endl;
@@ -204,39 +204,39 @@ void doPlayerEvents(bool *flag, bool *flagClick, bool *flagZoneClick,
             Usual *usual = nullptr;
             Cleaner *cleaner = nullptr;
 
-            if (level->colonies_[OUR_LAIR]->wasteResources(
+            if (level->getColonies()[OUR_LAIR]->wasteResources(
                     lair->checkTap(x1, y1, stormtrooper,
                                    hunter,
                                    usual,
                                    cleaner))) {
                 if (stormtrooper != nullptr) {
-                    level->colonies_[OUR_LAIR]->getArmy()->setUnit(stormtrooper);
-                    level->T->pushObject(stormtrooper);
+                    level->getColonies()[OUR_LAIR]->getArmy()->setUnit(stormtrooper);
+                    level->getTable()->pushObject(stormtrooper);
                 } else if (hunter != nullptr) {
-                    level->colonies_[OUR_LAIR]->getArmy()->setUnit(hunter);
-                    level->T->pushObject(hunter);
+                    level->getColonies()[OUR_LAIR]->getArmy()->setUnit(hunter);
+                    level->getTable()->pushObject(hunter);
                 } else if (usual != nullptr) {
-                    level->colonies_[OUR_LAIR]->getArmy()->setUnit(usual);
-                    level->T->pushObject(usual);
+                    level->getColonies()[OUR_LAIR]->getArmy()->setUnit(usual);
+                    level->getTable()->pushObject(usual);
                 } else if (cleaner != nullptr) {
-                    level->colonies_[OUR_LAIR]->getArmy()->setUnit(cleaner);
-                    level->T->pushObject(cleaner);
+                    level->getColonies()[OUR_LAIR]->getArmy()->setUnit(cleaner);
+                    level->getTable()->pushObject(cleaner);
                 }
-                level->colonies_[OUR_LAIR]->getLair()->setOpen(false);
+                level->getColonies()[OUR_LAIR]->getLair()->setOpen(false);
             }
         }
     }
 
     //объекты в выделенной области
     if (*flagClick || *flagZoneClick) {
-        objects = level->T->getObjects(x,y, width, height,
-                                       level->colonies_[OUR_LAIR]->getColor());
+        objects = level->getTable()->getObjects(x,y, width, height,
+                                       level->getColonies()[OUR_LAIR]->getColor());
     }
 
     //если тыкнули или выделили объекты
     if (objects.size() != 0) {
         //получаем логово
-        lair = level->colonies_[OUR_LAIR]->getLair();
+        lair = level->getColonies()[OUR_LAIR]->getLair();
 
         //если тыкнули на логово
         if (objects[0]->type == "lair") {
@@ -257,43 +257,43 @@ void doPlayerEvents(bool *flag, bool *flagClick, bool *flagZoneClick,
 void drawObjects(Level level, sf::RenderWindow *window, sf::Font &font) {
 
     //рисуем ресурсы
-    for (int i = 0; i < level.resources_.size(); i++) {
-        level.resources_[i]->draw(*window);
-        sf::Text text(std::to_string(level.resources_[i]->getHealth()), font, 15);
-        if (level.resources_[i]->getColony() != nullptr) {
-            if (level.resources_[i]->getColony()->getColor() == "red")
+    for (int i = 0; i < level.getResources().size(); i++) {
+        level.getResources()[i]->draw(*window);
+        sf::Text text(std::to_string(level.getResources()[i]->getHealth()), font, 15);
+        if (level.getResources()[i]->getColony() != nullptr) {
+            if (level.getResources()[i]->getColony()->getColor() == "red")
                 text.setFillColor(sf::Color::Red);
-            else if (level.resources_[i]->getColony()->getColor() == "green")
+            else if (level.getResources()[i]->getColony()->getColor() == "green")
                 text.setFillColor(sf::Color(40, 80, 40));
-            else if (level.resources_[i]->getColony()->getColor() == "magenta")
+            else if (level.getResources()[i]->getColony()->getColor() == "magenta")
                 text.setFillColor(sf::Color::Magenta);
-            else if (level.resources_[i]->getColony()->getColor() == "yellow")
+            else if (level.getResources()[i]->getColony()->getColor() == "yellow")
                 text.setFillColor(sf::Color::Yellow);
         } else
             text.setFillColor(sf::Color::Blue);
-        text.setPosition(level.resources_[i]->x + 30, level.resources_[i]->y - 10);
+        text.setPosition(level.getResources()[i]->x + 30, level.getResources()[i]->y - 10);
         window->draw(text);
     }
     //отрисовываем войска и логова
-    for (int i = 0; i < level.colonies_.size(); i++) {
-        if (level.colonies_[i]->getLair() != nullptr) {
-            level.colonies_[i]->getLair()->draw(*window);
-            sf::Text text(std::to_string(level.colonies_[i]->getLair()->getHealth()), font, 20);
-            if (level.colonies_[i]->getColor() == "red")
+    for (int i = 0; i < level.getColonies().size(); i++) {
+        if (level.getColonies()[i]->getLair() != nullptr) {
+            level.getColonies()[i]->getLair()->draw(*window);
+            sf::Text text(std::to_string(level.getColonies()[i]->getLair()->getHealth()), font, 20);
+            if (level.getColonies()[i]->getColor() == "red")
                 text.setFillColor(sf::Color::Red);
-            else if (level.colonies_[i]->getColor() == "green")
+            else if (level.getColonies()[i]->getColor() == "green")
                 text.setFillColor(sf::Color(40, 80, 40));
-            else if (level.colonies_[i]->getColor() == "magenta")
+            else if (level.getColonies()[i]->getColor() == "magenta")
                 text.setFillColor(sf::Color::Magenta);
-            else if (level.colonies_[i]->getColor() == "yellow")
+            else if (level.getColonies()[i]->getColor() == "yellow")
                 text.setFillColor(sf::Color::Yellow);
-            text.setPosition(level.colonies_[i]->getLair()->x + 30, level.colonies_[i]->getLair()->y - 30);
+            text.setPosition(level.getColonies()[i]->getLair()->x + 30, level.getColonies()[i]->getLair()->y - 30);
             window->draw(text);
         }
     }
 
-    for (int i = 0; i < level.colonies_.size(); i++) {
-        Army *A = level.colonies_[i]->getArmy();
+    for (int i = 0; i < level.getColonies().size(); i++) {
+        Army *A = level.getColonies()[i]->getArmy();
         if (A != nullptr) {
             for (int j = 0; j < A->getHunters().size(); j++) {
                 A->getHunters()[j]->draw(*window);
@@ -327,7 +327,7 @@ void drawObjects(Level level, sf::RenderWindow *window, sf::Font &font) {
         }
     }
 
-    level.colonies_[OUR_LAIR]->drawTableOfResource(window, font);
+    level.getColonies()[OUR_LAIR]->drawTableOfResource(window, font);
 }
 
 void
@@ -337,30 +337,30 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
     if (updateTable.getElapsedTime().asMilliseconds() > 10) {
 
         //конец игры
-        for (int i = 0; i < level->colonies_.size(); i++) {
-            level->colonies_[i]->getArmy()->checkUnitsHealth(level->T);
-            if (level->colonies_[i]->getLair() != nullptr) {
-                Lair *lair = level->colonies_[i]->getLair();
+        for (int i = 0; i < level->getColonies().size(); i++) {
+            level->getColonies()[i]->getArmy()->checkUnitsHealth(level->getTable());
+            if (level->getColonies()[i]->getLair() != nullptr) {
+                Lair *lair = level->getColonies()[i]->getLair();
                 if (lair->getHealth() <= 0) {
-                    level->T->deleteObject(lair);
+                    level->getTable()->deleteObject(lair);
                     delete lair;
-                    level->colonies_[i]->setLair(nullptr);
+                    level->getColonies()[i]->setLair(nullptr);
                 }
             }
-            if (level->colonies_[i]->getLair() == nullptr)
-                if (level->colonies_[i]->getArmy() != nullptr)
-                    if (level->colonies_[i]->getArmy()->size() == 0) {
-                        Army *army = level->colonies_[i]->getArmy();
-                        level->colonies_[i]->setArmy(nullptr);
+            if (level->getColonies()[i]->getLair() == nullptr)
+                if (level->getColonies()[i]->getArmy() != nullptr)
+                    if (level->getColonies()[i]->getArmy()->size() == 0) {
+                        Army *army = level->getColonies()[i]->getArmy();
+                        level->getColonies()[i]->setArmy(nullptr);
                         delete army;
                     }
-            if (level->colonies_[i]->getArmy() == nullptr && level->colonies_[i]->getLair() == nullptr) {
+            if (level->getColonies()[i]->getArmy() == nullptr && level->getColonies()[i]->getLair() == nullptr) {
                 //auto begin = level->colonies_.cbegin();
-                level->colonies_.erase(/*begin + */i);
+                level->getColonies().erase(/*begin + */i);
             }
         }
 
-        level->T->update(COLOR[OUR_LAIR], window);
+        level->getTable()->update(COLOR[OUR_LAIR], window);
 
         int j, k;
 
@@ -368,17 +368,17 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
         if (attack.getElapsedTime().asMilliseconds() > 1000) {
 
             //для каждой колонии
-            for (int q = 0; q < level->colonies_.size(); q++) {
-                if (level->colonies_[q]->getResources().size() >= level->colonies_[q]->getLair()->getLevel() * 2) {
-                    level->colonies_[q]->getLair()->levelUp();
+            for (int q = 0; q < level->getColonies().size(); q++) {
+                if (level->getColonies()[q]->getResources().size() >= level->getColonies()[q]->getLair()->getLevel() * 2) {
+                    level->getColonies()[q]->getLair()->levelUp();
                 }
-                Army *army = level->colonies_[q]->getArmy();
+                Army *army = level->getColonies()[q]->getArmy();
                 if (army != nullptr) {
-                    for (int p = 0; p < level->colonies_.size(); p++) {
-                        if (level->colonies_[q] == level->colonies_[p])
+                    for (int p = 0; p < level->getColonies().size(); p++) {
+                        if (level->getColonies()[q] == level->getColonies()[p])
                             continue;
                         else {
-                            Army *enemyArmy = level->colonies_[p]->getArmy();
+                            Army *enemyArmy = level->getColonies()[p]->getArmy();
 
                             container<Stormtrooper *> stormtroopers = army->getStormtroopers();
                             container<Usual *> usuals = army->getUsuals();
@@ -389,7 +389,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                                 if (stormtroopers[i]->x == stormtroopers[i]->moveX &&
                                     stormtroopers[i]->y == stormtroopers[i]->moveY) {
 
-                                    container<Cell *> cellsObject = level->T->getCellsObject(stormtroopers[i]);
+                                    container<Cell *> cellsObject = level->getTable()->getCellsObject(stormtroopers[i]);
                                     bool flagStop = false;
                                     for (j = 0; j < cellsObject.size(); j++) {
                                         container<Object *> objects = cellsObject[j]->getObjects();
@@ -401,8 +401,8 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                                                     flagStop = true;
                                                     break;
                                                 } else if (objects[k]->type == "lair" &&
-                                                           objects[k]->color == level->colonies_[p]->getColor()) {
-                                                    Lair *lair = level->colonies_[p]->getLair();
+                                                           objects[k]->color == level->getColonies()[p]->getColor()) {
+                                                    Lair *lair = level->getColonies()[p]->getLair();
                                                     lair->setHealth(lair->getHealth() - stormtroopers[i]->getDamage());
                                                     stormtroopers[i]->setState(true);
                                                     std::cout << "attack lair" << std::endl;
@@ -419,7 +419,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                             for (int i = 0; i < cleaners.size(); i++) {
                                 if (cleaners[i]->x == cleaners[i]->moveX && cleaners[i]->y == cleaners[i]->moveY) {
 
-                                    container<Cell *> cellsObject = level->T->getCellsObject(cleaners[i]);
+                                    container<Cell *> cellsObject = level->getTable()->getCellsObject(cleaners[i]);
                                     bool flagStop = false;
                                     cleaners[i]->setState(false);
                                     for (j = 0; j < cellsObject.size(); j++) {
@@ -428,7 +428,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                                             if (objects[k]->color != COLOR[q]) {
                                                 if (objects[k]->type == "resource") {
                                                     ((ResourcePoint *) objects[k])->takeDamage(cleaners[i]->getTake(),
-                                                                                               level->colonies_[q]);
+                                                                                               level->getColonies()[q]);
                                                     flagStop = true;
                                                     break;
                                                 }
@@ -442,7 +442,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                             for (int i = 0; i < hunters.size(); i++) {
                                 if (hunters[i]->x == hunters[i]->moveX && hunters[i]->y == hunters[i]->moveY) {
 
-                                    container<Cell *> cellsObject = level->T->getCellsObject(hunters[i]);
+                                    container<Cell *> cellsObject = level->getTable()->getCellsObject(hunters[i]);
                                     bool flagStop = false;
                                     hunters[i]->setState(false);
                                     for (j = 0; j < cellsObject.size(); j++) {
@@ -466,7 +466,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                             for (int i = 0; i < usuals.size(); i++) {
                                 if (usuals[i]->x == usuals[i]->moveX && usuals[i]->y == usuals[i]->moveY) {
 
-                                    container<Cell *> cellsObject = level->T->getCellsObject(usuals[i]);
+                                    container<Cell *> cellsObject = level->getTable()->getCellsObject(usuals[i]);
                                     bool flagStop = false;
                                     usuals[i]->setState(false);
                                     for (j = 0; j < cellsObject.size(); j++) {
@@ -483,7 +483,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                                                     if (((ResourcePoint *) objects[k])->getColony() == nullptr) {
                                                         ((ResourcePoint *) objects[k])->takeDamage(
                                                                 cleaners[i]->getTake(),
-                                                                level->colonies_[q]);
+                                                                level->getColonies()[q]);
                                                         flagStop = true;
                                                         break;
                                                     }
@@ -503,7 +503,7 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                 //добавка ресурсов
                 if (resource.getElapsedTime().asMilliseconds() > 60000) {
                     std::cout << "do it" << std::endl;
-                    container<Object *> resources = level->colonies_[q]->getResources();
+                    container<Object *> resources = level->getColonies()[q]->getResources();
                     for (int i = 0; i < resources.size(); i++) {
                         if (resources[i]->name == "acid") {
                             ((AcidPoint *) resources[i])->toIncrease(((AcidPoint *) resources[i])->getColony());
@@ -522,8 +522,8 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
 }
 
 void destroyGameScene(GameScene *&gameScene) {
-    for(int i=0; i<gameScene->level.colonies_.size(); i++){
-        Colony* colony = gameScene->level.colonies_[0];
+    for(int i=0; i<gameScene->level.getColonies().size(); i++){
+        Colony* colony = gameScene->level.getColonies()[0];
         Army* army=colony->getArmy();
         container<Stormtrooper*> stormtroopers=army->getStormtroopers();
         container<Cleaner*> cleaners=army->getCleaners();
