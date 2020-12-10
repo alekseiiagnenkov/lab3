@@ -164,16 +164,17 @@ container<T> container<T>::operator+(const container<T> &vec) {
 template<class T>
 void container<T>::resize(int index, int resize_size) {
     T *p = new T[resize_size];
-    if (data_ != nullptr) {
-        for (int i = 0, j = 0; i < size_; i++, j++) {
-            p[j] = data_[i];
+    if (this->data_ != nullptr) {
+        for (int i = 0, j = 0; i < this->size_; i++, j++) {
             if (index == i)
                 j--;
+            else
+                p[j] = this->data_[i];
         }
-        delete[] data_;
+        delete[] this->data_;
     }
-    data_ = p;
-    size_ = resize_size;
+    this->data_ = p;
+    this->size_ = resize_size;
 }
 
 template<class T>
@@ -188,14 +189,14 @@ int container<T>::findElement(T &element) {
 
 template<class T>
 void container<T>::push_back(const T &it) {
-    resize(size_ + 2, size_ + 1);
+    this->resize(size_ + 2, size_ + 1);
     data_[size_ - 1] = it;
 }
 
 template<class T>
 void container<T>::erase(int index) {
-    if (size_ > 0 && (index < size_ && index >= 0))
-        resize(index, size_ - 1);
+    if (this->size_ > 0 && (index < this->size_ && index >= 0))
+        this->resize(index, size_ - 1);
     else
         throw std::exception();
 }
