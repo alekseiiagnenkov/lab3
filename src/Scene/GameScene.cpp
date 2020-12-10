@@ -229,8 +229,8 @@ void doPlayerEvents(bool *flag, bool *flagClick, bool *flagZoneClick,
 
     //объекты в выделенной области
     if (*flagClick || *flagZoneClick) {
-        objects = level->getTable()->getObjects(x,y, width, height,
-                                       level->getColonies()[OUR_LAIR]->getColor());
+        objects = level->getTable()->getObjects(x, y, width, height,
+                                                level->getColonies()[OUR_LAIR]->getColor());
     }
 
     //если тыкнули или выделили объекты
@@ -355,7 +355,6 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                         delete army;
                     }
             if (level->getColonies()[i]->getArmy() == nullptr && level->getColonies()[i]->getLair() == nullptr) {
-                //auto begin = level->colonies_.cbegin();
                 level->getColonies().erase(/*begin + */i);
             }
         }
@@ -369,7 +368,8 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
 
             //для каждой колонии
             for (int q = 0; q < level->getColonies().size(); q++) {
-                if (level->getColonies()[q]->getResources().size() >= level->getColonies()[q]->getLair()->getLevel() * 2) {
+                if (level->getColonies()[q]->getResources().size() >=
+                    level->getColonies()[q]->getLair()->getLevel() * 2) {
                     level->getColonies()[q]->getLair()->levelUp();
                 }
                 Army *army = level->getColonies()[q]->getArmy();
@@ -389,7 +389,8 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                                 if (stormtroopers[i]->x == stormtroopers[i]->moveX &&
                                     stormtroopers[i]->y == stormtroopers[i]->moveY) {
 
-                                    container<Cell *> cellsObject = level->getTable()->getCellsObject(stormtroopers[i]);
+                                    container<Cell *> cellsObject = level->getTable()->getCellsObject(
+                                            stormtroopers[i]);
                                     bool flagStop = false;
                                     for (j = 0; j < cellsObject.size(); j++) {
                                         container<Object *> objects = cellsObject[j]->getObjects();
@@ -401,9 +402,11 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                                                     flagStop = true;
                                                     break;
                                                 } else if (objects[k]->type == "lair" &&
-                                                           objects[k]->color == level->getColonies()[p]->getColor()) {
+                                                           objects[k]->color ==
+                                                           level->getColonies()[p]->getColor()) {
                                                     Lair *lair = level->getColonies()[p]->getLair();
-                                                    lair->setHealth(lair->getHealth() - stormtroopers[i]->getDamage());
+                                                    lair->setHealth(
+                                                            lair->getHealth() - stormtroopers[i]->getDamage());
                                                     stormtroopers[i]->setState(true);
                                                     std::cout << "attack lair" << std::endl;
                                                     flagStop = true;
@@ -427,8 +430,9 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                                         for (k = 0; k < objects.size(); k++) {
                                             if (objects[k]->color != COLOR[q]) {
                                                 if (objects[k]->type == "resource") {
-                                                    ((ResourcePoint *) objects[k])->takeDamage(cleaners[i]->getTake(),
-                                                                                               level->getColonies()[q]);
+                                                    ((ResourcePoint *) objects[k])->takeDamage(
+                                                            cleaners[i]->getTake(),
+                                                            level->getColonies()[q]);
                                                     flagStop = true;
                                                     break;
                                                 }
@@ -498,48 +502,48 @@ updateScene(sf::Clock &updateTable, sf::Clock &attack, sf::Clock &resource, Leve
                             attack.restart();
                         }
                     }
-                }
 
-                //добавка ресурсов
-                if (resource.getElapsedTime().asMilliseconds() > 60000) {
-                    std::cout << "do it" << std::endl;
-                    container<Object *> resources = level->getColonies()[q]->getResources();
-                    for (int i = 0; i < resources.size(); i++) {
-                        if (resources[i]->name == "acid") {
-                            ((AcidPoint *) resources[i])->toIncrease(((AcidPoint *) resources[i])->getColony());
-                        } else if (resources[i]->name == "salt") {
-                            ((SaltPoint *) resources[i])->toIncrease(((SaltPoint *) resources[i])->getColony());
+                    //добавка ресурсов
+                    if (resource.getElapsedTime().asMilliseconds() > 60000) {
+                        std::cout << "do it" << std::endl;
+                        container<Object *> resources = level->getColonies()[q]->getResources();
+                        for (int i = 0; i < resources.size(); i++) {
+                            if (resources[i]->name == "acid") {
+                                ((AcidPoint *) resources[i])->toIncrease(((AcidPoint *) resources[i])->getColony());
+                            } else if (resources[i]->name == "salt") {
+                                ((SaltPoint *) resources[i])->toIncrease(((SaltPoint *) resources[i])->getColony());
+                            }
                         }
+                        resource.restart();
                     }
-                    resource.restart();
+
                 }
 
             }
-
         }
         updateTable.restart();
     }
 }
 
 void destroyGameScene(GameScene *&gameScene) {
-    for(int i=0; i<gameScene->level.getColonies().size(); i++){
-        Colony* colony = gameScene->level.getColonies()[0];
-        Army* army=colony->getArmy();
-        container<Stormtrooper*> stormtroopers=army->getStormtroopers();
-        container<Cleaner*> cleaners=army->getCleaners();
-        container<Usual*> usuals=army->getUsuals();
-        container<Hunter*> hunters=army->getHunters();
+    for (int i = 0; i < gameScene->level.getColonies().size(); i++) {
+        Colony *colony = gameScene->level.getColonies()[0];
+        Army *army = colony->getArmy();
+        container<Stormtrooper *> stormtroopers = army->getStormtroopers();
+        container<Cleaner *> cleaners = army->getCleaners();
+        container<Usual *> usuals = army->getUsuals();
+        container<Hunter *> hunters = army->getHunters();
 
-        for(int j=0; j<stormtroopers.size();j++){
+        for (int j = 0; j < stormtroopers.size(); j++) {
             delete stormtroopers[j];
         }
-        for(int j=0; j<cleaners.size();j++){
+        for (int j = 0; j < cleaners.size(); j++) {
             delete cleaners[j];
         }
-        for(int j=0; j<usuals.size();j++){
+        for (int j = 0; j < usuals.size(); j++) {
             delete usuals[j];
         }
-        for(int j=0; i<hunters.size();j++){
+        for (int j = 0; i < hunters.size(); j++) {
             delete hunters[j];
         }
         //delete colony->getLair()->getTableOfUnits();

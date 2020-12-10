@@ -58,12 +58,12 @@ public:
     /**
     * Ресурсы
     */
-    container<ResourcePoint *> getResources() { return this->resources_; }
+    container<ResourcePoint *>& getResources() { return this->resources_; }
 
     /**
     * Колонии
     */
-    container<Colony *> getColonies() { return this->colonies_; }
+    container<Colony *>& getColonies() { return this->colonies_; }
 
     /**
     * Загружает по пути объекты на карте: логово, юнитов, ресурсные точки
