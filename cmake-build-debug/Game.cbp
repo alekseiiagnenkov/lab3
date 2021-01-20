@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Game"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\lib\;CMake Files\lib\cmake_modules\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Game">
+				<Option output="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Game" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 Game"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Game/fast">
+				<Option output="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Game" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 Game/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="runGTests">
+				<Option output="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/runGTests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 runGTests"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="runGTests/fast">
+				<Option output="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/runGTests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-pc-linux-gnu"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/include-fixed"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 runGTests/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/alekseiiagnenkov/CLionProjects/C++/lab3/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/GoogleTests/gtest.cpp">
+			<Option target="runGTests"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/lib/MyContainer/Container.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/lib/tinyxml2/tinyxml2.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/lib/tinyxml2/tinyxml2.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/main.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Army/Army.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Army/Army.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Cell/Cell.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Cell/Cell.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Colony/Colony.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Colony/Colony.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Lair/Lair.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Lair/Lair.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Level/Level.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Level/Level.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Object/Object.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Object/Object.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/ResourcePoint/AcidPoint/AcidPoint.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/ResourcePoint/AcidPoint/AcidPoint.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/ResourcePoint/FoodPoint/FoodPoint.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/ResourcePoint/FoodPoint/FoodPoint.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/ResourcePoint/ResourcePoint.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/ResourcePoint/ResourcePoint.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/ResourcePoint/SaltPoint/SaltPoint.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/ResourcePoint/SaltPoint/SaltPoint.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Scene/GameScene.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Scene/GameScene.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Table/Table.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Table/Table.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/TableOfResource/TableOfResource.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/TableOfResource/TableOfResource.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/TableOfUnits/TableOfUnits.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/TableOfUnits/TableOfUnits.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Unit/Cleaner/Cleaner.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Unit/Cleaner/Cleaner.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Unit/Hunter/Hunter.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Unit/Hunter/Hunter.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Unit/Stormtrooper/Stormtrooper.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Unit/Stormtrooper/Stormtrooper.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Unit/Unit.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Unit/Unit.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Unit/Usual/Usual.cpp">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/src/Unit/Usual/Usual.h">
+			<Option target="Game"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/alekseiiagnenkov/CLionProjects/C++/lab3/lib/cmake_modules/FindSFML.cmake">
+			<Option virtualFolder="CMake Files\lib\cmake_modules\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

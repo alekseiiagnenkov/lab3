@@ -546,7 +546,6 @@ void destroyGameScene(GameScene *&gameScene) {
         for (int j = 0; i < hunters.size(); j++) {
             delete hunters[j];
         }
-        //delete colony->getLair()->getTableOfUnits();
         delete colony->getLair();
         delete colony->getTableOfResource();
     }
